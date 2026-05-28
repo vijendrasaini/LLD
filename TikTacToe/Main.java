@@ -10,6 +10,7 @@ class User {
     private int totalMove;
 
     public User(String name, int totalMove) {
+
         this.name = name;
         this.totalMove = totalMove;
     }
@@ -19,6 +20,10 @@ class User {
     }
 
     public void playNextMove() {
+
+    }
+
+    public void changeTheMove() {
 
     }
 }
@@ -33,6 +38,7 @@ class Board {
         this.columns = columns;
 
         this.board = new char[this.rows][this.columns];
+        resetTheBoard();
     }
 
     public void processResult() {
@@ -45,5 +51,24 @@ class Board {
                 this.board[i][j] = ' ';
             }
         }
+    }
+
+    public void showTheBoard() {
+        
+    }
+}
+
+class BuildTheGame {
+    private static User user1;
+    private static User user2;
+    private static Board board;
+    public static void setup() {
+        user1 = new User("User-1", 0);
+        user2 = new User("User-2", 0);
+
+        board = new Board(3, 3);
+    }
+    public start() {
+
     }
 }
