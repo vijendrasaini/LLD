@@ -1,0 +1,7 @@
+package Problems.TikTacToe;
+
+public class Main {
+    public static void main(String[] args) {
+        BuildTheGame.start();
+    }
+}
