@@ -56,14 +56,12 @@ class BuildTheGame {
             return;
         }
 
-        int[] pos = board.calculateCellIndexes(cell);
-        if(board.isMovePlayedForTheCell(pos[0], pos[1])) {
+        if(board.isMovePlayedForTheCell(cell)) {
             System.out.println("Kya aap such me andhe h ? Aapko dikhayi nhi deta .... ? ");
             return;
         }
 
-        board.playTheMove(pos[0], pos[1]);
-        System.out.println("X : %d, Y : %d".formatted(pos[0], pos[1]));
+        board.playTheMove(cell);
     }
 
     public static void commandUndoMove() {

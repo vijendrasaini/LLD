@@ -163,7 +163,9 @@ class Board {
         this.userPlayingTheMove = user;
     }
 
-    public void playTheMove(int x, int y) {
+    public void playTheMove(int cell) {
+        int[] pos = calculateCellIndexes(cell);
+        int x = pos[0], y = pos[1];
         this.userPlayingTheMove.setTotalMove(this.userPlayingTheMove.getTotalMove() + 1);
         char playedMove = userPlayingTheMove.getUserId() == 'O' ? 'O' : 'X';
         board[x][y] = playedMove;
@@ -189,8 +191,9 @@ class Board {
         System.out.println("------------Reverted.--------------");
     }
 
-    public boolean isMovePlayedForTheCell(int x, int y) {
-        return board[x][y] != ' ';
+    public boolean isMovePlayedForTheCell(int cell) {
+        int[] pos = calculateCellIndexes(cell);
+        return board[pos[0]][pos[1]] != ' ';
     }
 
     public void getMoves() {
