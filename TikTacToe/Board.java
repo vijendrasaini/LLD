@@ -197,4 +197,8 @@ class Board {
         System.out.println("Total moves played by User-O : "+ userO.getTotalMove());
         System.out.println("Total moves played by User-X : "+ userX.getTotalMove());
     }
+
+    public int[] calculateCellIndexes(int pos) {
+        return new int[]{(pos - 1) / 3, (pos - 1) % 3};
+    }
 }

@@ -6,15 +6,13 @@ class BuildTheGame {
     private static User userO;
     private static User userX;
     private static Board board;
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void setup() {
         userO = new User('O', 0);
         userX = new User('X', 0);
 
         board = new Board(3, 3, userO, userX);
-    }
-
-    public static int[] calculateCellIndexes(int pos) {
-        return new int[]{(pos - 1) / 3, (pos - 1) % 3};
     }
 
     public static void start() {
@@ -27,7 +25,6 @@ class BuildTheGame {
         System.out.println("Enter 2 : To revert / Undo the Move");
         System.out.println("Enter 3 : Exit");
 
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println();
             board.showTheBoard();
@@ -36,43 +33,59 @@ class BuildTheGame {
             int command = scanner.nextInt();
             switch (command) {
                 case 1:
-                    System.out.println("Please enter the Cell pos [1,9] : ");
-                    int cell = scanner.nextInt();
-                    if(cell < 1 || cell > 9) {
-                        System.out.println("Invalid input. Should be [1,9]");
-                        break;
-                    }
-
-                    int[] pos = BuildTheGame.calculateCellIndexes(cell);
-                    if(board.isMovePlayedForTheCell(pos[0], pos[1])) {
-                        System.out.println("Kya aap such me andhe h ? Aapko dikhayi nhi deta .... ? ");
-                        break;
-                    }
-
-                    board.playTheMove(pos[0], pos[1]);
-                    System.out.println("X : %d, Y : %d".formatted(pos[0], pos[1]));
+                    commandPlayNextMove();
                     break;
                 case 2:
-                    System.out.print("Are you sure you want to undo ? (0/1) : ");
-                    int undoConfirmation = scanner.nextInt();
-                    if(undoConfirmation == 1) {
-                        board.undoLastMove();
-                    }
+                    commandUndoMove();
                     break;
                 case 3:
-                    System.out.print("Are you sure you want to terminate ? (0/1) : ");
-                    int confirmation = scanner.nextInt();
-                    if(confirmation == 1) {
-                        System.out.println();
-                        System.out.println("Game is terminated. Hope you enjoyed. Thanks !!!");
-                        scanner.close();
-                        System.exit(confirmation);
-                    }
+                    commandTerminateTheGame();
                     break;
                 default:
-                    System.out.println("Invalid Input!!!!");
+                    processInvalidInput();
                     break;
             }
         }
+    }
+
+    public static void commandPlayNextMove() {
+        System.out.println("Please enter the Cell pos [1,9] : ");
+        int cell = scanner.nextInt();
+        if(cell < 1 || cell > 9) {
+            System.out.println("Invalid input. Should be [1,9]");
+            return;
+        }
+
+        int[] pos = board.calculateCellIndexes(cell);
+        if(board.isMovePlayedForTheCell(pos[0], pos[1])) {
+            System.out.println("Kya aap such me andhe h ? Aapko dikhayi nhi deta .... ? ");
+            return;
+        }
+
+        board.playTheMove(pos[0], pos[1]);
+        System.out.println("X : %d, Y : %d".formatted(pos[0], pos[1]));
+    }
+
+    public static void commandUndoMove() {
+        System.out.print("Are you sure you want to undo ? (0/1) : ");
+        int undoConfirmation = scanner.nextInt();
+        if (undoConfirmation == 1) {
+            board.undoLastMove();
+        }
+    }
+
+    public static void commandTerminateTheGame() {
+        System.out.print("Are you sure you want to terminate ? (0/1) : ");
+        int confirmation = scanner.nextInt();
+        if (confirmation == 1) {
+            System.out.println();
+            System.out.println("Game is terminated. Hope you enjoyed. Thanks !!!");
+            scanner.close();
+            System.exit(confirmation);
+        }
+    }
+
+    public static void processInvalidInput() {
+        System.out.println("Invalid Input!!!!");
     }
 }
