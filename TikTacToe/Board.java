@@ -204,4 +204,8 @@ class Board {
     public int[] calculateCellIndexes(int pos) {
         return new int[]{(pos - 1) / 3, (pos - 1) % 3};
     }
+
+    public boolean isValidCell(int cell) {
+        return cell > 0 && cell < 10;
+    }
 }

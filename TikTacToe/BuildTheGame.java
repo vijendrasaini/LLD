@@ -51,7 +51,7 @@ class BuildTheGame {
     public static void commandPlayNextMove() {
         System.out.println("Please enter the Cell pos [1,9] : ");
         int cell = scanner.nextInt();
-        if(cell < 1 || cell > 9) {
+        if(!board.isValidCell(cell)) {
             System.out.println("Invalid input. Should be [1,9]");
             return;
         }
