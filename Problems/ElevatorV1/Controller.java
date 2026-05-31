@@ -10,7 +10,7 @@ import Problems.ElevatorV1.Strategy.AssignElevator.SameDirectionAndNearByElevato
 
 public class Controller {
     private static final Controller INSTANCE = new Controller();
-    private List<Lift> elevatorsList;
+    private List<Elevator> elevatorsList;
     private AssignElevetorStrategy assignElevetorStrategy;
 
     private Controller() {
@@ -33,21 +33,21 @@ public class Controller {
         this.assignElevetorStrategy = assignElevetorStrategy;
     }
 
-    public void registerElevetor(Lift elevetor) {
+    public void registerElevetor(Elevator elevetor) {
         elevatorsList.add(elevetor);
     }
 
     public void processExternalRequest(ExternalRequest request) {
-        Lift elevetor = request.getElevetor();
+        Elevator elevetor = request.getElevetor();
         Floor floor = elevetor.getCurrentFloor();
         Direction direction = request.getDirection();
 
-        Lift assignedElevetor = this.assignElevetorStrategy.getElevetor(elevetor, elevatorsList, direction);
+        Elevator assignedElevetor = this.assignElevetorStrategy.getElevetor(elevetor, elevatorsList, direction);
         assignedElevetor.processDestinationFloor(request.getUserAtFloor());
     }
 
-    public Lift getElevator(int id) {
-        for (Lift lift : elevatorsList) {
+    public Elevator getElevator(int id) {
+        for (Elevator lift : elevatorsList) {
             if(lift.getId() == id) return lift;
         }
 

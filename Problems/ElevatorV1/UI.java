@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class UI {
     private static Scanner scanner = new Scanner(System.in);
-    private static Lift lift;
+    private static Elevator lift;
     public static void userInputProcessor() {
         try {
             while (true) {
@@ -65,11 +65,11 @@ public class UI {
         lift.processDestinationFloor(floor);
     }
 
-    public static Lift selectLift() {
+    public static Elevator selectLift() {
         System.out.println("Select Lift : ");
         System.out.println("ID ( 1 / 2 ) ");
         int id = scanner.nextInt();
-        Lift lift = Controller.getInstance().getElevator(id);
+        Elevator lift = Controller.getInstance().getElevator(id);
         lift.printLiftCurrentSituation();
         return lift;
     }

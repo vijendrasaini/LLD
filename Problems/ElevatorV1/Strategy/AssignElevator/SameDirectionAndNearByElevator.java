@@ -6,16 +6,16 @@ import java.util.List;
 import Problems.ElevatorV1.Direction;
 import Problems.ElevatorV1.ElevetorState;
 import Problems.ElevatorV1.Floor;
-import Problems.ElevatorV1.Lift;
+import Problems.ElevatorV1.Elevator;
 import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
 
 public class SameDirectionAndNearByElevator implements AssignElevetorStrategy{
-    public Lift getElevetor(Lift requestFromLift, List<Lift> lifts, Direction direction) {
-        List<Lift> goingInDirectionLifts = new ArrayList<>();
-        List<Lift> inRestLifts = new ArrayList<>();
+    public Elevator getElevetor(Elevator requestFromLift, List<Elevator> lifts, Direction direction) {
+        List<Elevator> goingInDirectionLifts = new ArrayList<>();
+        List<Elevator> inRestLifts = new ArrayList<>();
         Floor currentFloor = requestFromLift.getCurrentFloor();
 
-        for (Lift lift : lifts) {
+        for (Elevator lift : lifts) {
             if(lift.getElevetorState() == ElevetorState.IN_REST) {
                 inRestLifts.add(lift);
                 continue;
@@ -30,8 +30,8 @@ public class SameDirectionAndNearByElevator implements AssignElevetorStrategy{
             }
         }
 
-        List<Lift> nearByLifts = new ArrayList<>();
-        for (Lift lift : goingInDirectionLifts) {
+        List<Elevator> nearByLifts = new ArrayList<>();
+        for (Elevator lift : goingInDirectionLifts) {
             if(direction == Direction.UP && currentFloor.ordinal() - lift.getCurrentFloor().ordinal() > 0) { // Potential nearby lift
                 nearByLifts.add(lift);
             }

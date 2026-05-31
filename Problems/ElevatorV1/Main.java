@@ -10,8 +10,8 @@ public class Main {
         controller.setAssignElevetorStrategy(assignElevetorStrategy);
 
         // let's test it for now for 2 lifts
-        Lift lift1 = new Lift(); // id = 1;
-        Lift lift2 = new Lift(); // id = 2;
+        Elevator lift1 = new Elevator(); // id = 1;
+        Elevator lift2 = new Elevator(); // id = 2;
 
 
         controller.registerElevetor(lift1);

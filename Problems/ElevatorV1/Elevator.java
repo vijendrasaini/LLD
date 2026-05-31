@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import Problems.ElevatorV1.Request.ExternalRequest;
 
-public class Lift {
+public class Elevator {
     private int id;
     private Floor currentFloor;
     private static int nextId = 1;
@@ -15,8 +15,8 @@ public class Lift {
     private Collection<Floor> pendingUpRequests;
     private Collection<Floor> pendingDownRequest;
 
-    public Lift() {
-        this.id = Lift.nextId ++;// Mimicking unique Id behavior using auto increment concept
+    public Elevator() {
+        this.id = Elevator.nextId ++;// Mimicking unique Id behavior using auto increment concept
 
         currentFloor = Floor.GROUND;
         elevetorState = ElevetorState.IN_REST;
