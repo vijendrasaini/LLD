@@ -10,18 +10,18 @@ public class Elevator {
     private Floor currentFloor;
     private static int nextId = 1;
 
-    private ElevatorState elevetorState;
+    private ElevatorState elevatorState;
 
     private Collection<Floor> pendingUpRequests;
-    private Collection<Floor> pendingDownRequest;
+    private Collection<Floor> pendingDownRequests;
 
     public Elevator() {
         this.id = Elevator.nextId ++;// Mimicking unique Id behavior using auto increment concept
 
         currentFloor = Floor.GROUND;
-        elevetorState = ElevatorState.IN_REST;
+        elevatorState = ElevatorState.IN_REST;
         pendingUpRequests = new ArrayList<>();
-        pendingDownRequest = new ArrayList<>();
+        pendingDownRequests = new ArrayList<>();
     }
 
     public int getId() {
@@ -33,12 +33,12 @@ public class Elevator {
     }
     
     public ElevatorState getElevatorState() {
-        return elevetorState;
+        return elevatorState;
     }
     
-    public void setElevatorState(ElevatorState elevetorState) {
+    public void setElevatorState(ElevatorState elevatorState) {
         // Only to be called by Floor Detectors
-        this.elevetorState = elevetorState;
+        this.elevatorState = elevatorState;
     }
 
     public void setCurrentFloor(Floor currentFloor) {
@@ -49,16 +49,16 @@ public class Elevator {
     private void processPendindgRequests(Floor forFloor) {
         System.out.println("Processing request for : " + forFloor);
         // Safely remove the current floor from both lists without explicit loops
-        int size = pendingDownRequest.size() + pendingUpRequests.size();
-        pendingDownRequest.removeIf(floor -> floor == forFloor);
+        int size = pendingDownRequests.size() + pendingUpRequests.size();
+        pendingDownRequests.removeIf(floor -> floor == forFloor);
         pendingUpRequests.removeIf(floor -> floor == forFloor);
-        int nowSize = pendingDownRequest.size() + pendingUpRequests.size();
+        int nowSize = pendingDownRequests.size() + pendingUpRequests.size();
         if(size != nowSize) {
             openTheDoor(); // door will be open if some request have been processed.
         }
 
         // If no requests remain, change the state to REST
-        if (pendingDownRequest.isEmpty() && pendingUpRequests.isEmpty()) {
+        if (pendingDownRequests.isEmpty() && pendingUpRequests.isEmpty()) {
             setElevatorState(ElevatorState.IN_REST);
         }
 
@@ -78,52 +78,95 @@ public class Elevator {
     }
 
     public void processDestinationFloor(Floor floor) {
-        switch (elevetorState) {
-            case MOVEING_DOWN:
-                if(currentFloor.ordinal() - floor.ordinal() > 0) {
-                    pendingDownRequest.add(floor);
-                } else {
-                    pendingUpRequests.add(floor);
-                }
-                break;
-            case MOVEING_UP:
-                if(floor.ordinal() - currentFloor.ordinal() > 0) {
-                    pendingUpRequests.add(floor);
-                }
-                else {
-                    pendingDownRequest.add(floor);
-                }
-                break;
-            default:
-                if(currentFloor == floor) {
-                    // Lift is there only nothing to be done
-                    break;
-                }
+        submitRequest(floor);
+    }    
 
-                if(currentFloor.ordinal() - floor.ordinal() > 0) {
-                    pendingDownRequest.add(floor);
-                    elevetorState = ElevatorState.MOVEING_DOWN;
-                } else {
-                    pendingUpRequests.add(floor);
-                    elevetorState = ElevatorState.MOVEING_UP;
-                }
-                break;
+    public void submitRequest(Floor destinationFloor) {
+
+        if (isAlreadyAtDestination(destinationFloor)) {
+            return;
         }
+
+        addRequest(destinationFloor);
+
+        updateStateIfIdle(destinationFloor);
 
         closeTheDoor();
 
-        // show the status of lift if this is called
+        // // show the status of lift if this is called
         printLiftCurrentSituation();
-    }    
+    }
+
+    private boolean isAlreadyAtDestination(Floor destinationFloor) {
+        return currentFloor == destinationFloor;
+    }
+
+    private void addRequest(Floor destinationFloor) {
+
+        switch (elevatorState) {
+
+            case MOVEING_UP ->
+                    handleWhileMovingUp(destinationFloor);
+
+            case MOVEING_DOWN ->
+                    handleWhileMovingDown(destinationFloor);
+
+            case IN_REST ->
+                    handleWhileIdle(destinationFloor);
+        }
+    }
+
+    private void handleWhileMovingUp(Floor destinationFloor) {
+
+        if (destinationFloor.ordinal() > currentFloor.ordinal()) {
+            pendingUpRequests.add(destinationFloor);
+        } else {
+            pendingDownRequests.add(destinationFloor);
+        }
+    }
+
+    private void handleWhileMovingDown(Floor destinationFloor) {
+
+        if (destinationFloor.ordinal() < currentFloor.ordinal()) {
+            pendingDownRequests.add(destinationFloor);
+        } else {
+            pendingUpRequests.add(destinationFloor);
+        }
+    }
+
+    private void handleWhileIdle(Floor destinationFloor) {
+
+        if (destinationFloor.ordinal() > currentFloor.ordinal()) {
+
+            pendingUpRequests.add(destinationFloor);
+
+        } else {
+
+            pendingDownRequests.add(destinationFloor);
+        }
+    }
+
+    private void updateStateIfIdle(Floor destinationFloor) {
+
+        if (elevatorState != ElevatorState.IN_REST) {
+            return;
+        }
+
+        if (destinationFloor.ordinal() > currentFloor.ordinal()) {
+            elevatorState = ElevatorState.MOVEING_UP;
+        } else {
+            elevatorState = ElevatorState.MOVEING_DOWN;
+        }
+    }
 
     // just for visulization
     public void printLiftCurrentSituation() {
         System.out.println();
         System.out.println("ID : " + id);
-        System.out.println("Current State : " + elevetorState + ", Current Floor : " + currentFloor);
+        System.out.println("Current State : " + elevatorState + ", Current Floor : " + currentFloor);
         System.out.println("Pending Lists : ");
         System.out.println("UP : " + pendingUpRequests);
-        System.out.println("DOWN : " + pendingDownRequest);
+        System.out.println("DOWN : " + pendingDownRequests);
         System.out.println();
     }
 
