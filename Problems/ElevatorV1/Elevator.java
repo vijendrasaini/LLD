@@ -10,7 +10,7 @@ public class Elevator {
     private Floor currentFloor;
     private static int nextId = 1;
 
-    private ElevetorState elevetorState;
+    private ElevatorState elevetorState;
 
     private Collection<Floor> pendingUpRequests;
     private Collection<Floor> pendingDownRequest;
@@ -19,7 +19,7 @@ public class Elevator {
         this.id = Elevator.nextId ++;// Mimicking unique Id behavior using auto increment concept
 
         currentFloor = Floor.GROUND;
-        elevetorState = ElevetorState.IN_REST;
+        elevetorState = ElevatorState.IN_REST;
         pendingUpRequests = new ArrayList<>();
         pendingDownRequest = new ArrayList<>();
     }
@@ -32,11 +32,11 @@ public class Elevator {
         return currentFloor;
     }
     
-    public ElevetorState getElevetorState() {
+    public ElevatorState getElevatorState() {
         return elevetorState;
     }
     
-    public void setElevetorState(ElevetorState elevetorState) {
+    public void setElevatorState(ElevatorState elevetorState) {
         // Only to be called by Floor Detectors
         this.elevetorState = elevetorState;
     }
@@ -59,7 +59,7 @@ public class Elevator {
 
         // If no requests remain, change the state to REST
         if (pendingDownRequest.isEmpty() && pendingUpRequests.isEmpty()) {
-            setElevetorState(ElevetorState.IN_REST);
+            setElevatorState(ElevatorState.IN_REST);
         }
 
         printLiftCurrentSituation();
@@ -102,10 +102,10 @@ public class Elevator {
 
                 if(currentFloor.ordinal() - floor.ordinal() > 0) {
                     pendingDownRequest.add(floor);
-                    elevetorState = ElevetorState.MOVEING_DOWN;
+                    elevetorState = ElevatorState.MOVEING_DOWN;
                 } else {
                     pendingUpRequests.add(floor);
-                    elevetorState = ElevetorState.MOVEING_UP;
+                    elevetorState = ElevatorState.MOVEING_UP;
                 }
                 break;
         }

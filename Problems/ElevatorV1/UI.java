@@ -77,19 +77,19 @@ public class UI {
         Floor topFloor = Floor.values()[Floor.values().length - 1];
         lift.printLiftCurrentSituation();
         
-        if(lift.getElevetorState() != ElevetorState.IN_REST) {
-            if(lift.getElevetorState() == ElevetorState.MOVEING_UP) {
+        if(lift.getElevatorState() != ElevatorState.IN_REST) {
+            if(lift.getElevatorState() == ElevatorState.MOVEING_UP) {
                 if(lift.getCurrentFloor() == topFloor) {
-                    lift.setElevetorState(ElevetorState.MOVEING_DOWN);
+                    lift.setElevatorState(ElevatorState.MOVEING_DOWN);
                     return;
                 }
 
                 System.out.println("Updated FROM " + lift.getCurrentFloor() + " -> " + Floor.values()[lift.getCurrentFloor().ordinal() + 1]);
                 lift.setCurrentFloor(Floor.values()[lift.getCurrentFloor().ordinal() + 1]);
                 return;
-            } else if(lift.getElevetorState() == ElevetorState.MOVEING_DOWN) {
+            } else if(lift.getElevatorState() == ElevatorState.MOVEING_DOWN) {
                 if(lift.getCurrentFloor() == Floor.GROUND) {
-                    lift.setElevetorState(ElevetorState.MOVEING_UP);
+                    lift.setElevatorState(ElevatorState.MOVEING_UP);
                     return;
                 }
 
@@ -99,7 +99,7 @@ public class UI {
             }
         }
 
-        System.out.println("Can't be called since Lift status is : " + ElevetorState.IN_REST);
+        System.out.println("Can't be called since Lift status is : " + ElevatorState.IN_REST);
         return;
     }
 }

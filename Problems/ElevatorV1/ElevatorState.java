@@ -1,5 +1,5 @@
 package Problems.ElevatorV1;
 
-public enum ElevetorState {
+public enum ElevatorState {
     IN_REST, MOVEING_UP, MOVEING_DOWN
 }

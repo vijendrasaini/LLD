@@ -8,10 +8,10 @@ public abstract class Request {
     public Request(Elevator elevetor) {
         this.elevetor = elevetor;
     }
-    public Elevator getElevetor() {
+    public Elevator getElevator() {
         return elevetor;
     }
-    public void setElevetor(Elevator elevetor) {
+    public void setElevator(Elevator elevetor) {
         this.elevetor = elevetor;
     }
 }

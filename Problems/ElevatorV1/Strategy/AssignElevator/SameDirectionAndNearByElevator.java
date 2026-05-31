@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Problems.ElevatorV1.Direction;
-import Problems.ElevatorV1.ElevetorState;
+import Problems.ElevatorV1.ElevatorState;
 import Problems.ElevatorV1.Floor;
 import Problems.ElevatorV1.Elevator;
-import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
+import Problems.ElevatorV1.Strategy.AssignElevatorStrategy;
 
-public class SameDirectionAndNearByElevator implements AssignElevetorStrategy{
-    public Elevator getElevetor(Elevator requestFromLift, List<Elevator> lifts, Direction direction) {
+public class SameDirectionAndNearByElevator implements AssignElevatorStrategy{
+    public Elevator getElevator(Elevator requestFromLift, List<Elevator> lifts, Direction direction) {
         List<Elevator> goingInDirectionLifts = new ArrayList<>();
         List<Elevator> inRestLifts = new ArrayList<>();
         Floor currentFloor = requestFromLift.getCurrentFloor();
 
         for (Elevator lift : lifts) {
-            if(lift.getElevetorState() == ElevetorState.IN_REST) {
+            if(lift.getElevatorState() == ElevatorState.IN_REST) {
                 inRestLifts.add(lift);
                 continue;
             }
 
-            if(direction == Direction.UP && lift.getElevetorState() == ElevetorState.MOVEING_UP) {
+            if(direction == Direction.UP && lift.getElevatorState() == ElevatorState.MOVEING_UP) {
                 goingInDirectionLifts.add(lift);
             }
             
-            if(direction == Direction.DOWN && lift.getElevetorState() == ElevetorState.MOVEING_DOWN) {
+            if(direction == Direction.DOWN && lift.getElevatorState() == ElevatorState.MOVEING_DOWN) {
                 goingInDirectionLifts.add(lift);
             }
         }
@@ -59,7 +59,7 @@ public class SameDirectionAndNearByElevator implements AssignElevetorStrategy{
         }
 
         // if still not found than we have to return lift which is moving in opposite direction and can come quickly
-        // for simplicity , return first from the elevetor list since logic will become complex
+        // for simplicity , return first from the elevator list since logic will become complex
         return lifts.getFirst();
     }
     

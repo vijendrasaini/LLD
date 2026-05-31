@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Problems.ElevatorV1.Request.ExternalRequest;
-import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
+import Problems.ElevatorV1.Strategy.AssignElevatorStrategy;
 import Problems.ElevatorV1.Strategy.AssignElevator.AssignRequestedByElevator;
 import Problems.ElevatorV1.Strategy.AssignElevator.SameDirectionAndNearByElevator;
 
 public class Controller {
     private static final Controller INSTANCE = new Controller();
     private List<Elevator> elevatorsList;
-    private AssignElevetorStrategy assignElevetorStrategy;
+    private AssignElevatorStrategy assignElevatorStrategy;
 
     private Controller() {
         elevatorsList = new ArrayList<>();
@@ -21,29 +21,29 @@ public class Controller {
         return INSTANCE;
     }
 
-    public AssignElevetorStrategy getAssignElevetorStrategy() {
-        return assignElevetorStrategy;
+    public AssignElevatorStrategy getAssignElevatorStrategy() {
+        return assignElevatorStrategy;
     }
 
-    public void setAssignElevetorStrategy(AssignElevetorStrategy assignElevetorStrategy) {
-        if(assignElevetorStrategy instanceof AssignRequestedByElevator) {
-            System.out.println(assignElevetorStrategy.getClass().getName() + " is configured");
+    public void setAssignElevatorStrategy(AssignElevatorStrategy assignElevatorStrategy) {
+        if(assignElevatorStrategy instanceof AssignRequestedByElevator) {
+            System.out.println(assignElevatorStrategy.getClass().getName() + " is configured");
         }
 
-        this.assignElevetorStrategy = assignElevetorStrategy;
+        this.assignElevatorStrategy = assignElevatorStrategy;
     }
 
-    public void registerElevetor(Elevator elevetor) {
+    public void registerElevator(Elevator elevetor) {
         elevatorsList.add(elevetor);
     }
 
     public void processExternalRequest(ExternalRequest request) {
-        Elevator elevetor = request.getElevetor();
+        Elevator elevetor = request.getElevator();
         Floor floor = elevetor.getCurrentFloor();
         Direction direction = request.getDirection();
 
-        Elevator assignedElevetor = this.assignElevetorStrategy.getElevetor(elevetor, elevatorsList, direction);
-        assignedElevetor.processDestinationFloor(request.getUserAtFloor());
+        Elevator assignedElevator = this.assignElevatorStrategy.getElevator(elevetor, elevatorsList, direction);
+        assignedElevator.processDestinationFloor(request.getUserAtFloor());
     }
 
     public Elevator getElevator(int id) {
