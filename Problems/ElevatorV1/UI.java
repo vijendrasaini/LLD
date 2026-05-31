@@ -1,7 +1,5 @@
 package Problems.ElevatorV1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class UI {
