@@ -1,10 +1,10 @@
-package Problems.Elevator.Strategy.AssignElevator;
+package Problems.ElevatorV1.Strategy.AssignElevator;
 
 import java.util.List;
 
-import Problems.Elevator.Direction;
-import Problems.Elevator.Lift;
-import Problems.Elevator.Strategy.AssignElevetorStrategy;
+import Problems.ElevatorV1.Direction;
+import Problems.ElevatorV1.Lift;
+import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
 
 public class AssignRequestedByElevator implements AssignElevetorStrategy{
     @Override

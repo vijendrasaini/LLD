@@ -1,9 +1,9 @@
-package Problems.Elevator;
+package Problems.ElevatorV1;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import Problems.Elevator.Request.ExternalRequest;
+import Problems.ElevatorV1.Request.ExternalRequest;
 
 public class Lift {
     private int id;

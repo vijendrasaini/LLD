@@ -1,13 +1,13 @@
-package Problems.Elevator.Strategy.AssignElevator;
+package Problems.ElevatorV1.Strategy.AssignElevator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Problems.Elevator.Direction;
-import Problems.Elevator.ElevetorState;
-import Problems.Elevator.Floor;
-import Problems.Elevator.Lift;
-import Problems.Elevator.Strategy.AssignElevetorStrategy;
+import Problems.ElevatorV1.Direction;
+import Problems.ElevatorV1.ElevetorState;
+import Problems.ElevatorV1.Floor;
+import Problems.ElevatorV1.Lift;
+import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
 
 public class SameDirectionAndNearByElevator implements AssignElevetorStrategy{
     public Lift getElevetor(Lift requestFromLift, List<Lift> lifts, Direction direction) {

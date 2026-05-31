@@ -1,7 +1,7 @@
-package Problems.Elevator.Request;
-import Problems.Elevator.Direction;
-import Problems.Elevator.Floor;
-import Problems.Elevator.Lift;
+package Problems.ElevatorV1.Request;
+import Problems.ElevatorV1.Direction;
+import Problems.ElevatorV1.Floor;
+import Problems.ElevatorV1.Lift;
 
 public class ExternalRequest extends Request {
     private Direction direction;

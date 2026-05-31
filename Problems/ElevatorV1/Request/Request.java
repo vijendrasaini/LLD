@@ -1,7 +1,7 @@
-package Problems.Elevator.Request;
+package Problems.ElevatorV1.Request;
 
-import Problems.Elevator.FloorButton;
-import Problems.Elevator.Lift;
+import Problems.ElevatorV1.FloorButton;
+import Problems.ElevatorV1.Lift;
 
 public abstract class Request {
     private Lift elevetor;

@@ -1,7 +1,7 @@
-package Problems.Elevator;
+package Problems.ElevatorV1;
 
-import Problems.Elevator.Strategy.AssignElevetorStrategy;
-import Problems.Elevator.Strategy.AssignElevator.AssignRequestedByElevator;
+import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
+import Problems.ElevatorV1.Strategy.AssignElevator.AssignRequestedByElevator;
 
 public class Main {
     public static void main(String[] args) {

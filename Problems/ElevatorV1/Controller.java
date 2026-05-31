@@ -1,12 +1,12 @@
-package Problems.Elevator;
+package Problems.ElevatorV1;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Problems.Elevator.Request.ExternalRequest;
-import Problems.Elevator.Strategy.AssignElevetorStrategy;
-import Problems.Elevator.Strategy.AssignElevator.AssignRequestedByElevator;
-import Problems.Elevator.Strategy.AssignElevator.SameDirectionAndNearByElevator;
+import Problems.ElevatorV1.Request.ExternalRequest;
+import Problems.ElevatorV1.Strategy.AssignElevetorStrategy;
+import Problems.ElevatorV1.Strategy.AssignElevator.AssignRequestedByElevator;
+import Problems.ElevatorV1.Strategy.AssignElevator.SameDirectionAndNearByElevator;
 
 public class Controller {
     private static final Controller INSTANCE = new Controller();

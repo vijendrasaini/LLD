@@ -1,4 +1,4 @@
-package Problems.Elevator;
+package Problems.ElevatorV1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
