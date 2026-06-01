@@ -200,18 +200,18 @@ These problems teach the fundamentals.
 
 ### Learn
 
-* State Pattern
-* Chain of Responsibility
+* [x] State Pattern
+* [x] Chain of Responsibility
 * Banking Transactions
 
 ### Deliverables
 
-* [ ] Requirements
-* [ ] UML
-* [ ] Transaction Flow
-* [ ] Code
-* [ ] Refactoring
-* [ ] Notes
+* [x] Requirements
+* [x] UML
+* [x] Transaction Flow
+* [x] Code
+* [x] Refactoring
+* [x] Notes
 
 ---
 
