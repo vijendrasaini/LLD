@@ -200,7 +200,7 @@ These problems teach the fundamentals.
 
 ### Learn
 
-* [x] State Pattern
+* State Pattern
 * [x] Chain of Responsibility
 * Banking Transactions
 
