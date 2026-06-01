@@ -1,7 +1,7 @@
 package Patterns.COR;
 
-public class HundredHandler extends Handler{
-    public HundredHandler(Handler nextHandler) {
-        super(100, nextHandler);
+public class HundredHandler extends Handler {
+    public HundredHandler(int totalNotes, Handler nextHandler) {
+        super(100, totalNotes, nextHandler);
     }
 }
