@@ -1,14 +1,26 @@
 package Problems.RentCar.Models;
 
 import Problems.RentCar.Enums.ProfileType;
+import Problems.RentCar.utils.Constants;
 
-public class UserProfile {
-    private int id;
+public class UserProfile extends Model {
     private String name;
     private ProfileType profileType;
-    public UserProfile(int id, String name, ProfileType profileType) {
-        this.id = id;
-        this.name = name;
+
+    public UserProfile(int id, ProfileType profileType) {
+        super(Constants.ENTITY_USERPROFILE);
         this.profileType = profileType;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ProfileType getProfileType() {
+        return profileType;
     }
 }
