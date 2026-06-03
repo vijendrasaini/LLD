@@ -1,20 +1,18 @@
 package Problems.RentCar.Models;
 
 import Problems.RentCar.Enums.VehicleType;
+import Problems.RentCar.utils.Constants;
 
-public class VehicleDetails {
-    private int id;
+public class VehicleDetails extends Model{
     private VehicleType vehicleType;
     private int registrationYear;
     private int mileage;
     private String brand;
     private String vehicleNumber;
-    public int getId() {
-        return id;
+    public VehicleDetails() {
+        super(Constants.ENTITY_VEHICLE_DETAILS);
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public VehicleType getVehicleType() {
         return vehicleType;
     }
@@ -44,5 +42,17 @@ public class VehicleDetails {
     }
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "VehicleDetails {" +
+                "id='" + id() + '\'' +
+                ", vehicleType=" + vehicleType +
+                ", brand='" + brand + '\'' +
+                ", vehicleNumber='" + vehicleNumber + '\'' +
+                ", registrationYear=" + registrationYear +
+                ", mileage=" + mileage + " km" +
+                '}';
     }
 }

@@ -1,28 +1,27 @@
 package Problems.RentCar.Models;
 
-public class Address {
-    private int id;
-    private String flateNumber;
-    private String setor;
+import Problems.RentCar.utils.Constants;
+
+public class Address extends Model {
+    private String flatNumber;
+    private String sector;
     private String city;
-    private String State;
-    public int getId() {
-        return id;
+    private String state;
+    public Address() {
+        super(Constants.ENTITY_ADDRESS);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public String getFlatNumber() {
+        return flatNumber;
     }
-    public String getFlateNumber() {
-        return flateNumber;
+    public void setFlatNumber(String flatNumber) {
+        this.flatNumber = flatNumber;
     }
-    public void setFlateNumber(String flateNumber) {
-        this.flateNumber = flateNumber;
+    public String getSector() {
+        return sector;
     }
-    public String getSetor() {
-        return setor;
-    }
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public void setSector(String sector) {
+        this.sector = sector;
     }
     public String getCity() {
         return city;
@@ -31,11 +30,20 @@ public class Address {
         this.city = city;
     }
     public String getState() {
-        return State;
+        return state;
     }
     public void setState(String state) {
-        State = state;
+        this.state = state;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Address {" +
+                "baseInfo=" + id() +
+                ", flatNumber='" + flatNumber + '\'' +
+                ", sector='" + sector + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }

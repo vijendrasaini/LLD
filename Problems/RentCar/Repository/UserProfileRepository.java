@@ -1,6 +1,7 @@
 package Problems.RentCar.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Problems.RentCar.Models.UserProfile;
@@ -23,5 +24,9 @@ public class UserProfileRepository implements Repository<UserProfile> {
     @Override
     public UserProfile getById(int id) {
         return map.getOrDefault(id, null);
+    }
+
+    public List<UserProfile> getAll() {
+        return map.values().stream().toList();
     }
 }
