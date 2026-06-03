@@ -21,7 +21,7 @@ public class VehicleService {
 
         vehicle.setAddressId(addressId);
         vehicle.setVehicleDetailsId(vehicleDetailsId);
-        vehicle.setHostId(vehicleDetailsId);
+        vehicle.setHostId(userId);
 
         vehicileRepository.save(vehicle);
         return vehicle.id();

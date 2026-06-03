@@ -11,8 +11,8 @@ import Problems.RentCar.Models.Vehicle;
 import Problems.RentCar.Models.VehicleDetails;
 import Problems.RentCar.Repository.AddressRepository;
 import Problems.RentCar.Repository.VehicleDetailRepository;
-import Problems.RentCar.Strategy.Sreach.VehicleSearchStrategy;
-import Problems.RentCar.utils.Exceptions.RecordNotFoundExecption;
+import Problems.RentCar.Strategy.search.VehicleSearchStrategy;
+import Problems.RentCar.utils.Exceptions.RecordNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
@@ -58,11 +58,11 @@ public class Main {
         // VehicleService.getInstance().printAllVehicles();
 
         // performing search
-        SearchService<Vehicle> vehicleSearchServic = new SearchService<>(new VehicleSearchStrategy());
-        List<Vehicle> list = vehicleSearchServic.search("karnatka");
+        SearchService<Vehicle> vehicleSearchService = new SearchService<>(new VehicleSearchStrategy());
+        List<Vehicle> list = vehicleSearchService.search("karnatka");
         if ( list.size() > 0 )  {
             // user wants to book first car for self drive
-            Vehicle selectedVehicle = list.getFirst();
+            Vehicle selectedVehicle = list.get(0);
 
             try {
                 int guestId = 1;
@@ -79,7 +79,7 @@ public class Main {
                 // Host can also rate to guest.
                 // Vehicle status will be changed to Availble or ( free to be booked by anyone now )
                 // so this is overall going to be the flow
-            } catch (RecordNotFoundExecption e) {
+            } catch (RecordNotFoundException e) {
                 System.out.println("Invalid vehcile ID. Vehicle does exist with the provided id.");
             }
         }

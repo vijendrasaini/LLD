@@ -2,7 +2,7 @@ package Problems.RentCar;
 
 import java.util.List;
 
-import Problems.RentCar.Strategy.Sreach.SearchStrategy;
+import Problems.RentCar.Strategy.search.SearchStrategy;
 
 public class SearchService<T> {
     private SearchStrategy<T> searchStrategy;

@@ -6,7 +6,7 @@ import Problems.RentCar.Models.Vehicle;
 import Problems.RentCar.Repository.BookingRepository;
 import Problems.RentCar.Repository.UserProfileRepository;
 import Problems.RentCar.Repository.VehicleRepository;
-import Problems.RentCar.utils.Exceptions.RecordNotFoundExecption;
+import Problems.RentCar.utils.Exceptions.RecordNotFoundException;
 
 public class BookingService {
     private static final BookingService INSTANCE = new BookingService();
@@ -18,11 +18,11 @@ public class BookingService {
         return INSTANCE;
     }
     
-    public int bookVehicle(int vehicleId, int guestId) throws RecordNotFoundExecption{
+    public int bookVehicle(int vehicleId, int guestId) throws RecordNotFoundException{
 
         Vehicle vehicle = vehicileRepository.getById(vehicleId);
         if(vehicle == null) {
-            throw new RecordNotFoundExecption("Vehicle not found Vehicle ID : ");
+            throw new RecordNotFoundException("Vehicle not found Vehicle ID : ");
         }
 
         vehicle.setStatus(VehicleStatus.BOOKED);

@@ -25,7 +25,7 @@ public class UserProfileService {
         return userProfileRepository.getById(id);
     }
 
-    public void printAllVehicles() {
+    public void printAllProfiles() {
         for (UserProfile vehicle : userProfileRepository.getAll()) {
             System.out.println(vehicle);
         }

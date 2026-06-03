@@ -2,12 +2,12 @@ package Problems.RentCar.utils.Exceptions;
 
 import Problems.RentCar.utils.Constants;
 
-public class RecordNotFoundExecption extends RuntimeException {
-    public RecordNotFoundExecption() {
+public class RecordNotFoundException extends RuntimeException {
+    public RecordNotFoundException() {
         super(Constants.RESULT_NOT_FOUND_EXCEPTION_MESSAGE);
     }
     
-    public RecordNotFoundExecption(String message) {
+    public RecordNotFoundException(String message) {
         super(message);
     }
 }

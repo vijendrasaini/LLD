@@ -1,4 +1,4 @@
-package Problems.RentCar.Strategy.Sreach;
+package Problems.RentCar.Strategy.search;
 
 import java.util.List;
 
