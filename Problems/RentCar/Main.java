@@ -73,6 +73,12 @@ public class Main {
 
                 // let's see the status after booking ...
                 System.out.println(VehicleService.getInstance().getVehicle(selectedVehicle.id()));
+
+                // Here after some time user can make the payment ( for that Strategy design pattern could be used to select the method)
+                // Once payment is success than Guest can rate to Host vehicle and to Host as well. 
+                // Host can also rate to guest.
+                // Vehicle status will be changed to Availble or ( free to be booked by anyone now )
+                // so this is overall going to be the flow
             } catch (RecordNotFoundExecption e) {
                 System.out.println("Invalid vehcile ID. Vehicle does exist with the provided id.");
             }
