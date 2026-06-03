@@ -2,7 +2,6 @@ package Problems.RentCar;
 
 import java.util.List;
 
-import javax.sql.rowset.serial.SerialArray;
 
 import Problems.RentCar.Enums.ProfileType;
 import Problems.RentCar.Enums.VehicleType;
@@ -12,7 +11,6 @@ import Problems.RentCar.Models.Vehicle;
 import Problems.RentCar.Models.VehicleDetails;
 import Problems.RentCar.Repository.AddressRepository;
 import Problems.RentCar.Repository.VehicleDetailRepository;
-import Problems.RentCar.Repository.VehicleRepository;
 import Problems.RentCar.Strategy.Sreach.VehicleSearchStrategy;
 import Problems.RentCar.utils.Exceptions.RecordNotFoundExecption;
 
