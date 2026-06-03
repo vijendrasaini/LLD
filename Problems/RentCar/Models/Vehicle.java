@@ -5,6 +5,7 @@ import Problems.RentCar.Repository.AddressRepository;
 import Problems.RentCar.Repository.UserProfileRepository;
 import Problems.RentCar.Repository.VehicleDetailRepository;
 import Problems.RentCar.utils.Constants;
+import java.util.Objects;
 
 public class Vehicle extends Model {
     private int vehicleDetailsId;
@@ -44,14 +45,15 @@ public class Vehicle extends Model {
         this.status = status;
     }
 
+    @Override
     public String toString() {
         VehicleDetails vehicleDetails = VehicleDetailRepository.getInstance().getById(getVehicleDetailsId());
         Address address = AddressRepository.getInstance().getById(getAddressId());
         UserProfile userProfile = UserProfileRepository.getInstance().getById(hostId);
 
-        return "Vehicle Status : " + status + "\n'" +
-            userProfile + "\n'" +
-            address + "\n'" +
-            vehicleDetails + "\n'";
+        return "Vehicle Status : " + Objects.toString(status, "UNKNOWN") + "\n'" +
+                "Host : " + Objects.toString(userProfile, "unknown host") + "\n'" +
+                "Address : " + Objects.toString(address, "unknown address") + "\n'" +
+                "VehicleDetails : " + Objects.toString(vehicleDetails, "unknown details") + "\n'";
     }
 }
