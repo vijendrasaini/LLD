@@ -6,7 +6,7 @@ public interface Command {
 }
 
 
-class LightCommand implements Command{
+class LightCommand implements Command {
     private OnOffAppliance light;
     public LightCommand(Light light) {
         this.light = light;

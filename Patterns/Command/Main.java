@@ -1,56 +1,84 @@
 package Patterns.Command;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        RemonteControl remonteControl = new RemonteControl();
-
-        // Appliances
-        Light light = new Light();
-        Fan fan = new Fan();
+        RemoteControl remonteControl = new RemoteControl();
         
-        // trun on the light
-        remonteControl.setCommand(new LightCommand(light));
-        remonteControl.pressButton();
+        // LightCommand lightCommand = new LightCommand(new Light());
+        
+        // Appliances
+        remonteControl.pressKey(Key.FOR_LIGHT);
+        remonteControl.pressKey(Key.FOR_FAN);
+        remonteControl.showStatus();
         remonteControl.pressUndoButton();
-
-        //trun on the fan
-        remonteControl.setCommand(new FanCommand(fan));
-        remonteControl.pressButton();
         remonteControl.pressUndoButton();
+        remonteControl.showStatus();
+        remonteControl.pressKey(Key.FOR_LIGHT);
+        remonteControl.pressKey(Key.FOR_FAN);
+        remonteControl.showStatus();
+        remonteControl.pressUndoButton();
+        remonteControl.pressUndoButton();
+        remonteControl.pressRedoButton();
+        remonteControl.pressKey(Key.FOR_FAN);
     }
 }
 
-class RemonteControl {
-    private Command command;
-    private Deque<Command> stack;
-    public RemonteControl() {
-        stack = new ArrayDeque<>();
+enum Key {
+    FOR_LIGHT,
+    FOR_FAN
+}
+
+class ApplianceCommand {
+}
+
+class RemoteControl {
+    private Deque<Command> undoStack;
+    private Deque<Command> redoStack;
+
+    private static Map<Key, Command> keyCommandMap = new HashMap<>();
+    public RemoteControl() {
+        undoStack = new ArrayDeque<>();
+        redoStack = new ArrayDeque<>();
+
+        keyCommandMap.put(Key.FOR_LIGHT, new LightCommand(new Light()));
+        keyCommandMap.put(Key.FOR_FAN, new FanCommand(new Fan()));
     }
 
-    void setCommand(Command command) {
-        this.command = command;
+    void showStatus() {
+        System.out.println(undoStack);
+        System.out.println(redoStack);
     }
-
-    void pressButton() {
-        if(command == null) {
-            throw new RuntimeException("Command is not set.");
-        }
-
+    void pressKey(Key key) {
+        Command command = keyCommandMap.get(key);
         command.execute();
-        stack.push(command);
+        undoStack.push(command);
+        redoStack.clear();
     }
 
     void pressUndoButton() {
-        if(stack.isEmpty()) {
+        if(undoStack.isEmpty()) {
+            System.out.println("Nothing to Undo");
             return;
         }
 
-        Command command = stack.poll();
+        Command command = undoStack.pop();
+        redoStack.push(command);
         command.undo();
+    }
+
+    void pressRedoButton() {
+        if(redoStack.isEmpty()) {
+            System.out.println("Nothing to Redo");
+            return;
+        }
+
+        Command command = redoStack.pop();
+        command.execute();
+        undoStack.push(command);
     }
 }
