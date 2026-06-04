@@ -2,12 +2,13 @@ package Patterns.Command;
 
 public interface Command {
     void execute();
+    void undo();
 }
 
 
-class LightOnCommand implements Command{
+class LightCommand implements Command{
     private OnOffAppliance light;
-    public LightOnCommand(Light light) {
+    public LightCommand(Light light) {
         this.light = light;
     }
 
@@ -15,23 +16,16 @@ class LightOnCommand implements Command{
     public void execute() {
         light.trunOn();
     }
-}
-
-class LightOffCommand implements Command{
-    private OnOffAppliance light;
-    public LightOffCommand(Light light) {
-        this.light = light;
-    }
 
     @Override
-    public void execute() {
+    public void undo() {
         light.trunOff();
     }
 }
 
-class FanOnCommand implements Command{
+class FanCommand implements Command{
     private OnOffAppliance fan;
-    public FanOnCommand(Fan fan) {
+    public FanCommand(Fan fan) {
         this.fan = fan;
     }
 
@@ -39,16 +33,9 @@ class FanOnCommand implements Command{
     public void execute() {
         fan.trunOn();
     }
-}
-
-class FanOffCommand implements Command{
-    private OnOffAppliance fan;
-    public FanOffCommand(Fan fan) {
-        this.fan = fan;
-    }
 
     @Override
-    public void execute() {
+    public void undo() {
         fan.trunOff();
     }
 }
