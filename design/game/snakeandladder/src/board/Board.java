@@ -64,6 +64,15 @@ public class Board {
 
         int[] pos = GameMath.getRowNCol(cellNum, this.COLUMN);
         return this.board.get(pos[0]).get(pos[1]);
+    } 
+
+    public Cell getCellByStep(Cell cell, int step) {
+        Cell ans = null;
+        return ans;
+    }
+
+    private int getCellIndex(Cell cell) {
+        return this.ROW * cell.getPosX() + cell.getPosY();
     }
 
     public boolean isStartCell(Cell cell) {
@@ -74,7 +83,84 @@ public class Board {
         return cell.getPosX() == this.ROW && cell.getPosY() == this.COLUMN;
     }
 
-    public void walkTheToken(User user, int byStep) {
+    public boolean isLastCell(int cellNum) {
+        return this.ROW * this.COLUMN - 1 == cellNum;
+    } 
+
+    private boolean isLadderBaseCell(int cellNum) {
+        Cell cell = this.getCell(cellNum);
+
+        for(Ladder ladder : ladders) {
+            if(ladder.isBaseCell(cell)) return true;
+        }
+
+        return false;
+    }
+
+    private boolean isSnakeHeadCell(int cellNum) {
+        Cell cell = this.getCell(cellNum);
+
+        for(Snake snake : snakes) {
+            if(snake.isHeadCell(cell)) return true;
+        }
+
+        return false;
+    }
+
+    private Snake getSnakeByHeadCell(Cell cell) {
+        for (Snake snake : snakes) {
+            if(snake.isHeadCell(cell)) return snake;
+        }
+
+        return snakes.get(0);
+    }
+
+    private Ladder getLadderByBaseCell(Cell cell) {
+        for(Ladder ladder : ladders) {
+            if(ladder.isBaseCell(cell)) return ladder;
+        }
+
+        return ladders.get(0);
+    }
+
+    public User walkTheToken(User user, int byStep) {
         System.out.println("Board is managing the final Position...");
+
+        Cell current = user.getToken().getCell();
+
+        int currentIndex = this.getCellIndex(current);
+        // step 1 : Check if the move is not going out of board. If so do nothing
+        if(currentIndex + byStep > ( this.ROW * this.COLUMN - 1)) {
+            System.out.println("Out of board..so doing nothing");
+            return null;
+        }
+
+        int moveCellNum = currentIndex + byStep;
+        Cell moveCell = this.getCell(moveCellNum);
+        // step 2 : check if the token reaching to last cell of the board. If so declared the user as Winner.
+        if(isLastCell(moveCellNum)) {
+            System.out.println("Winner from system: Token ID : " + user.getToken().getId());
+            return user;
+        }
+
+        // ( clarification to be taken from interivew : What if a cell is ladder base also and snake head also than how to handle that case)
+        // for now giving priority to ladder base ( final decision : where I and interview both get alligned )
+        // Also there might be more than one ladder or snake on a target cell in that case which needs to be considered will be decided after having discussion with him
+
+        // step 3: check if the final move postion has some snake or ladder
+        if(isLadderBaseCell(moveCellNum)) {
+            Ladder ladder = getLadderByBaseCell(moveCell);
+            ladder.climb(user);
+            return walkTheToken(user, 0); // what if the cell where the ladder ends a new ladder starts so making recurrsive call
+        }
+
+        // step 3: check if the final move postion has some snake or ladder
+        if(isSnakeHeadCell(moveCellNum)) {
+            Snake snake = this.getSnakeByHeadCell(moveCell);
+            snake.bites(user);
+            return walkTheToken(user, 0); // what if the cell where the ladder ends a new ladder starts so making recurrsive call
+        }
+
+        return null;
     }
 }

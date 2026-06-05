@@ -12,7 +12,11 @@ public class Ladder extends ChangeScore{
         this.top = top;
     }
 
-    void climb(User user) {
-        change(top, user);
+    public void climb(User user) {
+        change(this.top, user);
+    }
+
+    public boolean isBaseCell(Cell cell) {
+        return cell == this.base;
     }
 }
