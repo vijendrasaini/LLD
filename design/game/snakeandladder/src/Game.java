@@ -61,9 +61,8 @@ public class Game {
 
     public void start() {
         User winner = null;
-        boolean isDraw = false;
         
-        while (winner == null && !isDraw) {
+        while (winner == null) {
             System.out.println("Enter 1 : Play Move");
             System.out.println("Enter 2 : End the Game");
             System.out.println("Enter 3 : Print the boadr");
@@ -94,8 +93,6 @@ public class Game {
 
         if(winner != null) {
             System.out.println("Winner user Id : " + winner.getToken().getId());
-        } else if(isDraw) {
-            System.out.println("Game has been Drawwwwwwwn!!!!");
         }
     }
 
