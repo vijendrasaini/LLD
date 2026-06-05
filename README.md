@@ -332,7 +332,7 @@ Frequently asked in interviews.
 
 ---
 
-## 11. Snake and Ladder (4 Hours)
+## [x] 11. Snake and Ladder (4 Hours)
 
 ### Learn
 
@@ -340,9 +340,9 @@ Frequently asked in interviews.
 
 ### Deliverables
 
-* [ ] UML
-* [ ] Code
-* [ ] Notes
+* [x] UML
+* [x] Code
+* [x] Notes
 
 ---
 
