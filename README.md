@@ -451,7 +451,7 @@ Frequently asked in interviews.
 
 ### Learn
 
-* Chain of Responsibility
+* [x] Chain of Responsibility
 
 ### Deliverables
 
