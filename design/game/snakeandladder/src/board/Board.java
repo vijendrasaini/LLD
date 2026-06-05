@@ -25,6 +25,18 @@ public class Board {
         this.ladders = new ArrayList<>();
     }
 
+    public int getRow() {
+        return this.ROW;
+    }
+
+    public int getColumn() {
+        return this.COLUMN;
+    }
+    
+    public Cell getCellByXAndY(int x, int y) {
+        return this.board.get(x).get(y);
+    }
+    
     public void addSnake(Snake snake) {
         this.snakes.add(snake);
     }
@@ -57,7 +69,7 @@ public class Board {
     }
 
     public Cell getCell(int cellNum) {
-        cellNum--;
+        // System.out.println("Query -> cellNUmber : " + cellNum);
         if( cellNum < 0 || cellNum > this.ROW * this.COLUMN - 1) {
             throw new RuntimeException("Invalide Cell Number");
         }
@@ -71,7 +83,7 @@ public class Board {
         return ans;
     }
 
-    private int getCellIndex(Cell cell) {
+    public int getCellIndex(Cell cell) {
         return this.ROW * cell.getPosX() + cell.getPosY();
     }
 
@@ -125,6 +137,11 @@ public class Board {
 
     public User walkTheToken(User user, int byStep) {
         System.out.println("Board is managing the final Position...");
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("Thread intrupped!!!");
+        }
 
         Cell current = user.getToken().getCell();
 
@@ -137,6 +154,7 @@ public class Board {
 
         int moveCellNum = currentIndex + byStep;
         Cell moveCell = this.getCell(moveCellNum);
+        // System.out.println("(old, new) : (%d, %d)".formatted(currentIndex, moveCellNum) + ", move Cell : X : " + moveCell.getPosX() + " Y : " + moveCell.getPosY());
         // step 2 : check if the token reaching to last cell of the board. If so declared the user as Winner.
         if(isLastCell(moveCellNum)) {
             System.out.println("Winner from system: Token ID : " + user.getToken().getId());
@@ -161,6 +179,8 @@ public class Board {
             return walkTheToken(user, 0); // what if the cell where the ladder ends a new ladder starts so making recurrsive call
         }
 
+        // Simply update the Cell for the user
+        user.getToken().setCell(moveCell);
         return null;
     }
 }

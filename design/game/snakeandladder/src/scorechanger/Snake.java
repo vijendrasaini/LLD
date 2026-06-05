@@ -17,10 +17,20 @@ public class Snake extends ChangeScore{
     }
 
     public void bites(User user) {
+        System.out.println("Snakes bites to User : %d and sending now at POSITION : (%d, %d)".formatted(user.getToken().getId(), this.tail.getPosX(), this.tail.getPosY()));
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("Thread intrupped ");
+        }
         change(this.tail, user);
     }
 
     public boolean isHeadCell(Cell cell) {
         return cell == this.head;
+    }
+
+    public Cell getTailCell() {
+        return this.tail;
     }
 }

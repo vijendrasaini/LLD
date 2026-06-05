@@ -13,10 +13,20 @@ public class Ladder extends ChangeScore{
     }
 
     public void climb(User user) {
+        System.out.println("USER : %d is taking jump to : (%d, %d)".formatted(user.getToken().getId(), this.top.getPosX(), this.top.getPosY()));
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("Thread intrupped ");
+        }
         change(this.top, user);
     }
 
     public boolean isBaseCell(Cell cell) {
         return cell == this.base;
+    }
+
+    public Cell getTopCell() {
+        return this.top;
     }
 }

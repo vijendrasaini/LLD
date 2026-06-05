@@ -19,7 +19,7 @@ public class User {
         this.board = board;
     }
 
-    public void play() {
+    public User play() {
         // Roll the Dice
         System.out.println("Rolling the Dice ...");
         try {
@@ -32,10 +32,10 @@ public class User {
         System.out.println("Dice result : " + diceResult);
 
         // let's walk the move on the board.
-        moveToken(diceResult);
+        return moveToken(diceResult);
     }
 
-    private void moveToken(int byStep) {
-        board.walkTheToken(this, byStep);
+    private User moveToken(int byStep) {
+        return board.walkTheToken(this, byStep);
     }
 }
