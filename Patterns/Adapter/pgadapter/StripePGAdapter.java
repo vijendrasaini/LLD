@@ -1,4 +1,7 @@
-package Patterns.Adapter;
+package Patterns.Adapter.pgadapter;
+
+import Patterns.Adapter.PaymentGateway;
+import Patterns.Adapter.StripeApi;
 
 public class StripePGAdapter implements PaymentGateway {
     
