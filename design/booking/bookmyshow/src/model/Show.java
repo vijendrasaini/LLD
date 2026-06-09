@@ -1,8 +1,9 @@
 package design.booking.bookmyshow.src.model;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import design.booking.bookmyshow.src.repository.InMememoryRepository;
 
 public class Show {
     private int id;
@@ -25,9 +26,11 @@ public class Show {
         return id;
     }
 
-    public synchronized boolean reserveSeats(List<ShowSeat> showSeats, int userId) {
+    public boolean reserveSeats(List<ShowSeat> showSeats, int userId) {
         // this seats are contested resources so we will lock these.
         // let's first lock to all seats
+
+        showSeats.sort((s1, s2) -> s1.getId() - s2.getId());
         
         for (ShowSeat showSeat : showSeats) {
             showSeat.getReentrantLock().lock();

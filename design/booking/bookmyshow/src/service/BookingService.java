@@ -2,6 +2,7 @@ package design.booking.bookmyshow.src.service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import design.booking.bookmyshow.src.model.Booking;
 import design.booking.bookmyshow.src.model.BookingStatus;
@@ -29,7 +30,7 @@ public class BookingService {
         List<ShowSeat> showSeats = showSeatInMememoryRepository.findAll().stream()
             .filter(showSeat -> showSeat.getSeatStatus() == SeatStatus.FREE)
             .filter(showSeat -> seatIds.contains(showSeat.getSeat().getId()))
-            .toList();
+            .collect(Collectors.toList());
             
         if(showSeats.size() != seatIds.size()) {
             throw new RuntimeException("Can't book all seats");
