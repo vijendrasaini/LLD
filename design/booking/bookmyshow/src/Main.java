@@ -3,6 +3,8 @@ package design.booking.bookmyshow.src;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.spi.ImageInputStreamSpi;
+
 import Problems.RentCar.Repository.BookingRepository;
 import design.booking.bookmyshow.src.model.Screen;
 import design.booking.bookmyshow.src.model.Seat;
@@ -10,6 +12,8 @@ import design.booking.bookmyshow.src.model.SeatType;
 import design.booking.bookmyshow.src.model.Show;
 import design.booking.bookmyshow.src.model.ShowSeat;
 import design.booking.bookmyshow.src.model.Theatre;
+import design.booking.bookmyshow.src.model.User;
+import design.booking.bookmyshow.src.repository.InMememoryRepository;
 import design.booking.bookmyshow.src.service.BookingService;
 
 public class Main {
@@ -28,8 +32,15 @@ public class Main {
             showSeats.add(new ShowSeat(seat));
         }
 
-        Show show = new Show(screen1, null, null, null, showSeats);
+        Show show = new Show(1, screen1, null, null, null, showSeats);
 
-        BookingService bookingRepository = new BookingService();
+        User user = new User(1, "vijendra@gmail.com", "Vijendra");
+
+        InMememoryRepository<Show> inMememoryRepository = new InMememoryRepository<>();
+        BookingService bookingRepository = new BookingService(inMememoryRepository);
+        List<Integer> seatIds = new ArrayList<>();
+        seatIds.add(showSeats.get(0).getSeat().getId());
+        seatIds.add(showSeats.get(1).getSeat().getId()); // 
+        bookingRepository.bookTicket(user.getId(), show.getId(), seatIds);
     }    
 }

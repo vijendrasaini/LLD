@@ -1,18 +1,18 @@
 package design.booking.bookmyshow.src.model;
 
 public class Seat {
-    private int it;
+    private int id;
     private String seatNumber;
     private SeatType seatType;
 
-    public Seat(int it, String seatNumber, SeatType seatType) {
-        this.it = it;
+    public Seat(int id, String seatNumber, SeatType seatType) {
+        this.id = id;
         this.seatNumber = seatNumber;
         this.seatType = seatType;
     }
 
-    public int getIt() {
-        return it;
+    public int getId() {
+        return id;
     }
 
     public String getSeatNumber() {

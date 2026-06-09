@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class InMememoryRepository<T> {
     private Map<Integer, T> db;
-    private InMememoryRepository() {
+    public InMememoryRepository() {
         this.db = new HashMap<>();
     }
 
