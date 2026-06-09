@@ -6,15 +6,14 @@ public class ShowSeat {
     private int id;
     private Seat seat;
     private SeatStatus seatStatus;
-    private Show show;
     private String valideTill;
     private ReentrantLock reentrantLock;
+    private int reservedBy;
 
-    public ShowSeat(int id, Seat Seat, Show show) {
+    public ShowSeat(int id, Seat Seat) {
         this.id = id;
         this.seat = Seat;
         this.seatStatus = SeatStatus.FREE;
-        this.show = show;
         this.reentrantLock = new ReentrantLock();
     }
 
@@ -28,10 +27,6 @@ public class ShowSeat {
 
     public Seat getSeat() {
         return seat;
-    }
-
-    public Show getShow() {
-        return show;
     }
 
     public SeatStatus getSeatStatus() {
@@ -48,5 +43,13 @@ public class ShowSeat {
 
     public ReentrantLock getReentrantLock() {
         return reentrantLock;
+    }
+
+    public void setReservedBy(int reservedBy) {
+        this.reservedBy = reservedBy;
+    }
+
+    public int getReservedBy() {
+        return reservedBy;
     }
 }
