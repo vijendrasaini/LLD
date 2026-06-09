@@ -28,19 +28,36 @@ public class Main {
 
         List<Seat> seats = List.of(seat1, seat2, seat3);
         List<ShowSeat> showSeats = new ArrayList<>();
-        for (Seat seat : seats) {
-            showSeats.add(new ShowSeat(seat));
-        }
-
-        Show show = new Show(1, screen1, null, null, null, showSeats);
-
-        User user = new User(1, "vijendra@gmail.com", "Vijendra");
 
         InMememoryRepository<Show> inMememoryRepository = new InMememoryRepository<>();
-        BookingService bookingRepository = new BookingService(inMememoryRepository);
+        InMememoryRepository<ShowSeat> showSeatInMememoryRepository = new InMememoryRepository<>();
+        
+
+        Show show = new Show(1, screen1, "current date", "start date", "end date");
+        for (Seat seat : seats) {
+            showSeats.add(new ShowSeat(seat.getId(), seat, show));
+        }
+
+        for (ShowSeat showSeat : showSeats) {
+            showSeatInMememoryRepository.insert(showSeat.getId(), showSeat);
+        }
+
+
+        inMememoryRepository.insert(show.getId(), show);
+        User user = new User(1, "vijendra@gmail.com", "Vijendra");
+
+        BookingService bookingRepository = new BookingService(inMememoryRepository, showSeatInMememoryRepository);
         List<Integer> seatIds = new ArrayList<>();
         seatIds.add(showSeats.get(0).getSeat().getId());
-        seatIds.add(showSeats.get(1).getSeat().getId()); // 
+        seatIds.add(showSeats.get(1).getSeat().getId());
+
+
         bookingRepository.bookTicket(user.getId(), show.getId(), seatIds);
+        try {
+            System.out.println("Seats : " + seatIds + " have been booked reserved please pay the amount.");
+        } catch (Exception e) {
+            System.out.println(" some errro while booking ...");
+            System.out.println(e.getMessage());
+        }
     }    
 }

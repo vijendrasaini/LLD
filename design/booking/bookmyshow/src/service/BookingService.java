@@ -4,20 +4,20 @@ import java.util.List;
 
 import design.booking.bookmyshow.src.model.Show;
 import design.booking.bookmyshow.src.model.ShowSeat;
-import design.booking.bookmyshow.src.model.User;
 import design.booking.bookmyshow.src.repository.InMememoryRepository;
 
 public class BookingService {
     private InMememoryRepository<Show> showInMememoryRepository;
-    public BookingService(InMememoryRepository<Show> showInMememoryRepository) {
+    private InMememoryRepository<ShowSeat> showSeatInMememoryRepository;
+    public BookingService(InMememoryRepository<Show> showInMememoryRepository, InMememoryRepository<ShowSeat> showSeatInMememoryRepository) {
         this.showInMememoryRepository = showInMememoryRepository;
+        this.showSeatInMememoryRepository = showSeatInMememoryRepository;
     }
 
     public boolean bookTicket(int userId, int showId, List<Integer> seatIds) {
-
+        
         Show show = showInMememoryRepository.findById(showId);
-        show.reserveSeats(seatIds);
-        // payment logic goes here.
+        show.reserveSeats(seatIds, showSeatInMememoryRepository);
         return true;
     }
 }
