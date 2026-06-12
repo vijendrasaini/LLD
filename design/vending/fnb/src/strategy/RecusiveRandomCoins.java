@@ -3,17 +3,13 @@ import java.util.List;
 
 import design.vending.fnb.src.model.CashReserver;
 
-public class RecusiveRandomCoins extends HandleCoinsStrategy{
-    public RecusiveRandomCoins(CashReserver cashReserver) {
-        super(cashReserver);
-    }
-
+public class RecusiveRandomCoins implements HandleCoinsStrategy {
     @Override
-    public boolean canGiveAmount(int amount) {
-        List<Integer> availableCoins = this.cashReserver.getAvailableCoins();
+    public boolean canGiveAmount(CashReserver cashReserver, int amount) {
+        List<Integer> availableCoins = cashReserver.getAvailableCoins();
         if(availableCoins.size() == 0 ) return false;
 
-        return canGiveRecurrsive(amount, this.cashReserver.getAvailableCoins(), 0);
+        return canGiveRecurrsive(amount, cashReserver.getAvailableCoins(), 0);
     }
 
     private boolean canGiveRecurrsive(int amount, List<Integer> coins, int coinIndex) {
@@ -28,7 +24,7 @@ public class RecusiveRandomCoins extends HandleCoinsStrategy{
     }
 
     @Override
-    public void giveAmount(int amount) {
+    public void giveAmount(CashReserver cashReserver, int amount) {
         // @todo take or don't take ( also coin count needs to keep in mind. we have sufficient count supply )
     }
 }

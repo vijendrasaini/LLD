@@ -7,13 +7,9 @@ import java.util.List;
 import design.vending.fnb.src.model.CashReserver;
 import design.vending.fnb.src.model.Coin;
 
-public class FirstHighValueCoins extends HandleCoinsStrategy{
-    public FirstHighValueCoins(CashReserver cashReserver) {
-        super(cashReserver);
-    }
-
+public class FirstHighValueCoins implements HandleCoinsStrategy {
     @Override
-    public boolean canGiveAmount(int amount) {
+    public boolean canGiveAmount(CashReserver cashReserver, int amount) {
         System.out.println("Request for %d".formatted(amount));
         if(amount < 0) {
             throw new InvalidParameterException("Negative amount !");
@@ -21,7 +17,7 @@ public class FirstHighValueCoins extends HandleCoinsStrategy{
 
         if(amount == 0) return true;
 
-        List<Integer> availableCoins = this.cashReserver.getAvailableCoins();
+        List<Integer> availableCoins = cashReserver.getAvailableCoins();
         System.out.println(availableCoins);
 
         int n = amount;
@@ -33,7 +29,7 @@ public class FirstHighValueCoins extends HandleCoinsStrategy{
             }
 
             // let's how many notes are present
-            int canGiveCoins = this.cashReserver.getCoinCount(new Coin(coin));
+            int canGiveCoins = cashReserver.getCoinCount(new Coin(coin));
             if(canGiveCoins >= needCoinCount) {
                 n = n % coin; // 
                 System.out.println("CHECK : Considered All : %d X %d = %d".formatted(coin, needCoinCount, coin * needCoinCount)); // just for
@@ -53,8 +49,8 @@ public class FirstHighValueCoins extends HandleCoinsStrategy{
     }
 
     @Override
-    public void giveAmount(int amount) {
-        if(!this.canGiveAmount(amount)) {
+    public void giveAmount(CashReserver cashReserver, int amount) {
+        if(!cashReserver.canGiveAmount(amount)) {
             throw new RuntimeException("Can't fullfill request of Amount : " + amount);
         }
 
@@ -66,7 +62,7 @@ public class FirstHighValueCoins extends HandleCoinsStrategy{
         
         if(amount == 0) return;
 
-        List<Integer> availableCoins = this.cashReserver.getAvailableCoins();
+        List<Integer> availableCoins = cashReserver.getAvailableCoins();
         System.out.println(availableCoins);
 
         int n = amount;
@@ -78,13 +74,13 @@ public class FirstHighValueCoins extends HandleCoinsStrategy{
             }
 
             // let's how many notes are present
-            int canGiveCoins = this.cashReserver.getCoinCount(new Coin(coin));
+            int canGiveCoins = cashReserver.getCoinCount(new Coin(coin));
             if(canGiveCoins >= needCoinCount) {
-                this.cashReserver.giveCoins(coin, needCoinCount); // Telling reserver to reducing
+                cashReserver.giveCoins(coin, needCoinCount); // Telling reserver to reducing
                 n = n % coin; // 
                 System.out.println("GIVE : Considered All : %d X %d = %d".formatted(coin, needCoinCount, coin * needCoinCount)); // just for
             } else {
-                this.cashReserver.giveCoins(coin, canGiveCoins);
+                cashReserver.giveCoins(coin, canGiveCoins);
                 n = n - canGiveCoins * coin;
                 System.out.println("GIVE : Only Available : %d X %d = %d".formatted(coin, canGiveCoins, canGiveCoins * coin));
             }

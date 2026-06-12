@@ -54,3 +54,15 @@ Now Interview Feedback (things I'd challenge)
 4. Hidden Bug in completeTransaction() ❌
 5. Inventory availability validation missing ⚠️
 6. CashReserve Greedy Algorithm ⚠️
+
+====================================================================================
+Overall Score
+Requirement Gathering      8.5
+Domain Modeling            9.0
+Responsibilities           9.0
+Coupling                   9.5
+OOP / SOLID                8.5
+Behavior                   8.0
+Communication              9.5
+--------------------------------
+Overall                    8.9–9.2 / 10

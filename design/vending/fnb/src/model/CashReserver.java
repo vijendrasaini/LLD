@@ -11,7 +11,8 @@ import design.vending.fnb.src.strategy.HandleCoinsStrategy;
 public class CashReserver {
     private Map<Integer, Integer> notes;
     private HandleCoinsStrategy handleCoinsStrategy;
-    public CashReserver() {
+    public CashReserver(HandleCoinsStrategy handleCoinsStrategy) {
+        this.handleCoinsStrategy = handleCoinsStrategy;
         this.notes = new HashMap<>();
     }
 
@@ -59,11 +60,11 @@ public class CashReserver {
             .toList();
     }
     public boolean canGiveAmount(int amount) {
-        return this.handleCoinsStrategy.canGiveAmount(amount);
+        return this.handleCoinsStrategy.canGiveAmount(this, amount);
     }
 
     public void giveAmount(int amount) {
-        this.handleCoinsStrategy.giveAmount(amount);
+        this.handleCoinsStrategy.giveAmount(this, amount);
     }
 
     public void viewReserver() { // only for owner ( as of now just for see what's happening )
