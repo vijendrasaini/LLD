@@ -9,6 +9,8 @@ import design.vending.fnb.src.model.Inventory;
 import design.vending.fnb.src.model.Product;
 import design.vending.fnb.src.model.Slot;
 import design.vending.fnb.src.service.Machine;
+import design.vending.fnb.src.strategy.FirstHighValueCoins;
+import design.vending.fnb.src.strategy.HandleCoinsStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,6 +36,7 @@ public class Main {
         Coin coin1 = new Coin(1);
         
         CashReserver cashReserver = new CashReserver();
+        cashReserver.setHandleCoinsStrategy(new FirstHighValueCoins(cashReserver));
         // adding few coins to the Reserver at starting of the program to test 
         // 50 : 1, 20 : 1, 10 : 2, 5 : 2, 2 : 1, 1 : 5
         cashReserver.putCoins(List.of(

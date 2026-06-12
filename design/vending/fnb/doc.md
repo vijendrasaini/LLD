@@ -42,3 +42,15 @@ Domain Modeling      : 8.5/10
 Ownership Analysis   : 9/10
 Responsibilities     : 8/10
 Implementation       : Still Early
+
+
+=================================================================================
+
+Now Interview Feedback (things I'd challenge)
+
+1. Status enum is doing too much ⚠️
+2. Transaction status still missing ⚠️
+3. BUG — submit() is not atomic ❌ (Important)
+4. Hidden Bug in completeTransaction() ❌
+5. Inventory availability validation missing ⚠️
+6. CashReserve Greedy Algorithm ⚠️
