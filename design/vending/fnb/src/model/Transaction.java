@@ -8,17 +8,14 @@ import design.vending.fnb.src.enums.SlotCode;
 public class Transaction {
     private SlotCode slotCode;
     private Product product;
-    private Inventory inventory;
     private List<Coin> coins;
-    public Transaction(Inventory inventory) {
-        this.inventory = inventory;
+    public Transaction() {
         this.coins = new ArrayList<>();
     }
 
-    public void setSlotCode(SlotCode slotCode) {
+    public void select(SlotCode slotCode, Product product) {
         this.slotCode = slotCode;
-
-        this.product = this.inventory.getProduct(slotCode);
+        this.product = product;
     }
 
     public void addCoins(List<Coin> coins) {

@@ -25,7 +25,7 @@ public class Machine {
     }
 
     public void selectProduct(SlotCode code) {
-        this.getTransaction().setSlotCode(code);
+        this.getTransaction().select(code, this.inventory.getProduct(code));
     }
 
     public void takeCoins(List<Coin> coins) {
@@ -68,7 +68,7 @@ public class Machine {
 
     private Transaction getTransaction() {
         if(this.currentTransaction == null) {
-            this.currentTransaction = new Transaction(this.inventory);
+            this.currentTransaction = new Transaction();
         }
         
         return this.currentTransaction;
