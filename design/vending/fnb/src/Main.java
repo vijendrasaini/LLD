@@ -3,6 +3,7 @@ package design.vending.fnb.src;
 import java.util.List;
 
 import design.vending.fnb.src.enums.SlotCode;
+import design.vending.fnb.src.model.CashReserver;
 import design.vending.fnb.src.model.Coin;
 import design.vending.fnb.src.model.Inventory;
 import design.vending.fnb.src.model.Product;
@@ -21,12 +22,12 @@ public class Main {
         Slot kurkureSlot = new Slot(1, kurkure);
     
         Inventory inventory = new Inventory();
+        CashReserver cashReserver = new CashReserver();
         inventory.addSlot(SlotCode.CANDY, candySlot);
         inventory.addSlot(SlotCode.WATER, waterSlot);
         inventory.addSlot(SlotCode.CHILPS, kurkureSlot);
 
-        Machine machine = new Machine(inventory);
-        machine.showProducts();
+        Machine machine = new Machine(inventory, cashReserver);
 
         Coin coinFifty = new Coin(50);
         Coin coinTen = new Coin(10);
@@ -38,7 +39,11 @@ public class Main {
 
         // 2. user select a product i.e. Candy
         machine.selectProduct(SlotCode.CANDY);
+
+        // 3. user insserting coins
         machine.takeCoins(List.of(coinFive));
+
+        // 4. user submitted request to machine
         machine.submit();
     }
 }

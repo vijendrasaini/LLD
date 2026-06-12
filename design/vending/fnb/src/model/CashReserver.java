@@ -1,4 +1,5 @@
 package design.vending.fnb.src.model;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,13 @@ public class CashReserver {
     }
 
     public void putCoins(List<Coin> coins) {
-        // @todo
+        System.out.println("Adding coing to reserver");
+        
+        try {
+            Thread.sleep(Duration.ofSeconds(1));
+        } catch (Exception e) {}
+        
+        // @todo : Pending to be completed the rest
     }
 
     public void updateCoinByNumber(Coin coin, int number) {
@@ -32,7 +39,7 @@ public class CashReserver {
     }
 
     public boolean canGiveAmount(int amount) {
-        // @todo : Has to be completed ( for now considering that it)
+        // @todo : Has to be completed ( for now considering that it returns sometime true sometime false)
         // List<Integer> availableCoins = this.notes.keySet().stream()
         //     .filter(coin -> this.notes.getOrDefault(coin, 0) > 0)
         //     .sorted(Comparator.reverseOrder())
@@ -47,6 +54,16 @@ public class CashReserver {
         //     int remainingAmount = amount % coin;
         // }
 
-        return false;
+        return true;
+    }
+
+    public void giveAmount(int amount) {
+        System.out.println("Cash Reserver processing amount : " + amount);
+        
+        try {
+            Thread.sleep(Duration.ofSeconds(1));
+        } catch (Exception e) {}
+        
+        // @todo : Pending to be completed the rest
     }
 }

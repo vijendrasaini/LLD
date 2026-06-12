@@ -19,6 +19,10 @@ public class Product {
         return image;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public void show() {
         System.out.println("Name : " + this.name + ", Price : " + this.price + ", Image : " + this.image);
     }

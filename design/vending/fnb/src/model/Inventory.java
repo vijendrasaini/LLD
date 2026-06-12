@@ -1,5 +1,6 @@
 package design.vending.fnb.src.model;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,20 @@ public class Inventory {
                 slot.showProduct();
             }
         }
+
+        System.out.println();
+    }
+
+    public Product getProduct(SlotCode slotCode) {
+        return this.slots.get(slotCode).getProduct();
+    }
+
+    public void reduceQuantityByOne(SlotCode slotCode) {
+        System.out.println("Reducing Quanity by One");
+        try {
+            Thread.sleep(Duration.ofSeconds(1));
+        } catch (Exception e) {}
+        
+        this.slots.get(slotCode).reduceQuantityByOne();
     }
 }

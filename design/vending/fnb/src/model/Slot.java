@@ -10,7 +10,11 @@ public class Slot {
         this.product = product;
     }
 
-    public void reductQuantityByOne() {
+    public void reduceQuantityByOne() {
+        if(this.quantity == 0) {
+            throw new RuntimeException("No more quanity left for product:[name=%s] to reduce.".formatted(this.product.getName()));
+        }
+        
         this.quantity--;
     }
 
@@ -25,5 +29,9 @@ public class Slot {
     public void showProduct() {
         // ask product to show.
         this.product.show();
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }
