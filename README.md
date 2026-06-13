@@ -247,11 +247,11 @@ These problems teach the fundamentals.
 
 ### Deliverables
 
-* [ ] Requirements
-* [ ] UML
-* [ ] Code
-* [ ] Refactoring
-* [ ] Notes
+* [x] Requirements
+* [x] UML
+* [x] Code
+* [x] Refactoring
+* [x] Notes
 
 ---
 
@@ -326,9 +326,9 @@ Frequently asked in interviews.
 
 ### Deliverables
 
-* [ ] UML
-* [ ] Code
-* [ ] Notes
+* [x] UML
+* [x] Code
+* [x] Notes
 
 ---
 
@@ -492,10 +492,10 @@ Frequently asked in interviews.
 
 ### Deliverables
 
-* [ ] Requirements
-* [ ] UML
-* [ ] Code
-* [ ] Notes
+* [x] Requirements
+* [x] UML
+* [x] Code
+* [x] Notes
 
 ---
 
