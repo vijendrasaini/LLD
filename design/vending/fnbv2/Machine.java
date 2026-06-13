@@ -107,6 +107,7 @@ public class Machine {
 
     private void updateScreen() {
         System.out.println("Your transaction is completed. Thanks for your time !!!");
+        this.status = MachineStatus.IDLE;
     }
 
     public void dispense() {
