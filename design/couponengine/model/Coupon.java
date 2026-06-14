@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import design.couponengine.dto.DiscountResult;
+import design.couponengine.dto.EligibilityContext;
 import design.couponengine.dto.EligibilityResult;
 import design.couponengine.eligibility.Eligibility;
 import design.couponengine.strategy.discountcalculator.DiscountCalculator;
@@ -46,9 +47,9 @@ public class Coupon {
         this.eligibilities.add(eligibility);
     }
 
-    public List<EligibilityResult> isEligible(double amount) {
+    public List<EligibilityResult> evaluateEligibility(EligibilityContext eligibilityContext) {
         return this.eligibilities.stream()
-        .map(eligibility -> eligibility.check(amount))
+        .map(eligibility -> eligibility.check(eligibilityContext))
         .filter(eligibilityResult -> !eligibilityResult.isPassed())
         .toList();
     }
