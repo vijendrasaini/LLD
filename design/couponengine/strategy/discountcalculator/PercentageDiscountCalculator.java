@@ -1,6 +1,6 @@
 package design.couponengine.strategy.discountcalculator;
 
-import design.couponengine.model.DiscountResult;
+import design.couponengine.dto.DiscountResult;
 
 public class PercentageDiscountCalculator implements DiscountCalculator {
     private double percentage;

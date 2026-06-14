@@ -1,4 +1,4 @@
-package design.couponengine.model;
+package design.couponengine.dto;
 
 public class DiscountResult {
     private double originalAmount;
@@ -9,8 +9,6 @@ public class DiscountResult {
     }
 
     public double getFinalAmount() {
-        // System.out.println(originalAmount);
-        // System.out.println(discountAmount);
         return originalAmount - discountAmount;
     }
 }
