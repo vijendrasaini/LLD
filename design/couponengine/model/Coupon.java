@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 import design.couponengine.strategy.discountcalculator.DiscountCalculator;
 
 public class Coupon {
-    private String id;
+    private String code;
     private String description;
     private LocalDateTime expiresAt;
     private boolean isActive;
 
     private DiscountCalculator discountCalculator;
-    public Coupon(String id, String description, LocalDateTime expiresAt, DiscountCalculator discountCalculator) {
-        this.id = id;
+    public Coupon(String code, String description, LocalDateTime expiresAt, DiscountCalculator discountCalculator) {
+        this.code = code;
         this.description = description;
         this.expiresAt = expiresAt;
         this.isActive = true;
@@ -20,15 +20,11 @@ public class Coupon {
         this.discountCalculator = discountCalculator;
     }
 
-    public DiscountResult apply(double amount) {
+    public DiscountResult calculateDiscount(double amount) {
         return this.discountCalculator.calculate(amount);
     }
 
-    public LocalDateTime getExpiresAt() {
-        return expiresAt;
-    }
-
-    public boolean isActive() {
-        return isActive;
+    public boolean isApplicable() {
+        return expiresAt.isAfter(LocalDateTime.now()) && this.isActive;
     }
 }
