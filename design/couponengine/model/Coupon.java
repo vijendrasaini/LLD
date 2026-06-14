@@ -20,7 +20,15 @@ public class Coupon {
         this.discountCalculator = discountCalculator;
     }
 
-    public DiscountResult apply(int amount) {
+    public DiscountResult apply(double amount) {
         return this.discountCalculator.calculate(amount);
+    }
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }
