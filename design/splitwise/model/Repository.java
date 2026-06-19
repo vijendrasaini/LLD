@@ -5,36 +5,36 @@ import java.util.List;
 import java.util.Map;
 
 public class Repository {
-    Map<Integer, Transaction> transactions;
+    Map<Integer, Expense> expenses;
     private static int counter = 0;
 
     public Repository() {
-        this.transactions = new HashMap<>();
+        this.expenses = new HashMap<>();
     }
 
-    public void add(Transaction transaction) {
-        this.transactions.put(++counter, transaction);
+    public void add(Expense expense) {
+        this.expenses.put(++counter, expense);
     }
 
-    public Transaction get(int transId) {
-        if(this.transactions.get(transId) == null) {
-            throw new RuntimeException("Transaction not found for ID : " + transId);
+    public Expense get(int transId) {
+        if(this.expenses.get(transId) == null) {
+            throw new RuntimeException("expense not found for ID : " + transId);
         }
         
-        return this.transactions.get(transId);
+        return this.expenses.get(transId);
     }
 
-    public List<Transaction> getforGroup(int groupId) {
-        return this.transactions.values().stream()
-                .filter(transaction -> transaction.getGroupId() == groupId)
+    public List<Expense> getforGroup(int groupId) {
+        return this.expenses.values().stream()
+                .filter(expense -> expense.getGroupId() == groupId)
                 .toList();
     }
 
-    public void update(int transId, Transaction transaction) {
-        if(this.transactions.get(transId) == null) {
-            throw new RuntimeException("Transaction not found for ID : " + transId);
+    public void update(int transId, Expense expense) {
+        if(this.expenses.get(transId) == null) {
+            throw new RuntimeException("expense not found for ID : " + transId);
         }
 
-        this.transactions.put(transId, transaction);
+        this.expenses.put(transId, expense);
     }
 }
