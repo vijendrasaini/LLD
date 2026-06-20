@@ -1,31 +1,35 @@
 package design.splitwise.model;
-
-import java.util.List;
-
 public class Expense {
     private int id;
     private double amount;
-    private int paidBy;
-    private int groupId;
-    private List<Integer> participantIds;
+    private User paidByUser;
+    private Group group;
+    private SplitDetail splitDetail;
 
-    public Expense(int id, double amount, int paidBy, int groupId, List<Integer> participantIds) {
-        this.id = id;
+    public Expense(double amount, User paidByUser, Group group, SplitDetail splitDetail) {
         this.amount = amount;
-        this.paidBy = paidBy;
-        this.groupId = groupId;
-        this.participantIds = participantIds;
+        this.paidByUser = paidByUser;
+        this.group = group;
+        this.splitDetail = splitDetail;
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public int getPaidBy() {
-        return paidBy;
+    public User getPaidBy() {
+        return paidByUser;
     }
 
-    public int getGroupId() {
-        return groupId;
+    public Group getGroup() {
+        return group;
+    }
+
+    public SplitDetail getSplitDetail() {
+        return splitDetail;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
