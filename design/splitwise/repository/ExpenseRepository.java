@@ -1,5 +1,6 @@
 package design.splitwise.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class ExpenseRepository implements Repository<Expense> {
     @Override
     public int add(Expense t) {
         int id = ++counter;
+        t.setId(id);
         this.expenses.put(id, t);
         return id;
     }
@@ -28,7 +30,7 @@ public class ExpenseRepository implements Repository<Expense> {
 
     @Override
     public List<Expense> getAll() {
-        return (List<Expense>) this.expenses.values();
+        return new ArrayList<>(this.expenses.values());
     }
 
     @Override

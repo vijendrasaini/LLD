@@ -5,24 +5,24 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import design.splitwise.enums.SplitType;
-import design.splitwise.strategy.SplitStrategy;
+import design.splitwise.resolver.Resolver;
 
-// @todo : To be removed in future. Currently not using.
-public class SplitStrategyFactory {
-    private Map<SplitType, Supplier<SplitStrategy>> supplierMap;
-    public SplitStrategyFactory() {
+public class ResolverFactory {
+    private Map<SplitType, Supplier<Resolver>> supplierMap;
+    public ResolverFactory() {
         this.supplierMap = new HashMap<>();
     }
 
-    public void register(SplitType splitType, Supplier<SplitStrategy> supplier) {
+    public void register(SplitType splitType, Supplier<Resolver> supplier) {
         this.supplierMap.put(splitType, supplier);
     }
 
-    public SplitStrategy get(SplitType splitType) {
+    public Resolver get(SplitType splitType) {
         if(this.supplierMap.get(splitType) == null) {
             throw new RuntimeException("Registion is not done for type : " + splitType);
         }
 
         return this.supplierMap.get(splitType).get();
     }
+    
 }
