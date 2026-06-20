@@ -1,6 +1,5 @@
 package design.splitwise.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -12,7 +11,6 @@ import design.splitwise.dto.UserAmount;
 import design.splitwise.model.Balance;
 import design.splitwise.model.Expense;
 import design.splitwise.model.Group;
-import design.splitwise.model.SplitDetail;
 import design.splitwise.model.User;
 import design.splitwise.repository.BalanceRepository;
 import design.splitwise.repository.ExpenseRepository;
@@ -29,36 +27,6 @@ public class BalanceService {
         this.resolverFactory = resolverFactory;
         this.balanceRepository = balanceRepository;
     }
-
-    // double getExpenseData(User forUser, Group group) {
-    //     List<Expense> expensesByGroupId = expenseRepository.getExpensesByGroupId(group.getId());
-
-    //     for (Expense expense : expensesByGroupId) {
-    //         SplitDetail splitDetail = expense.getSplitDetail();
-    //     }
-
-    //     return 0;
-    // }
-
-    // public List<Expense> getParticpiatedExpenses(User user, Group group) {
-    //     // Get total wherever user participated as a participant or as a payer
-    //     List<Expense> expensesByGroupId = expenseRepository.getExpensesByGroupId(group.getId());
-    //     return expensesByGroupId.stream()
-    //             .filter(expense -> expense.getPaidBy().equals(user)
-    //                     || expense.getSplitDetail().getSplitParticipants().contains(user))
-    //             .toList();
-    // }
-
-    // public double getTotalPaidByUser(User user, Group group) {
-    //     return this.getParticpiatedExpenses(user, group).stream()
-    //             .filter(expense -> expense.getPaidBy().equals(user))
-    //             .reduce(0.0, (partialSum, expense) -> partialSum + expense.getAmount(), Double::sum);
-    // }
-
-    // public double getGroupTotalForUser(User user, Group group) {
-    //     return this.getParticpiatedExpenses(user, group).stream()
-    //             .reduce(0.0, (partialSum, expense) -> partialSum + expense.getAmount(), Double::sum);
-    // }
 
     public BalanceSummary getBalance(User user, Group group) {
         List<Balance> creditBalances = balanceRepository.getCreditBalances(user, group);
@@ -85,7 +53,6 @@ public class BalanceService {
             User debtor = resolvedShare.user;
             double amount = resolvedShare.amount;
 
-            // find the balance is alreay exist than update other wise insert
             Optional<Balance> balanceEntryForUsers = balanceRepository.getBalanceEntryForUsers(creditor, debtor,
                     expense.getGroup());
             if (balanceEntryForUsers.isPresent()) {
