@@ -24,7 +24,7 @@ public class App {
         System.out.println(ticket1);
 
         // after quite some time
-        parkingLot.unparkVehicle(ticket1);
+        ParkingTicket ticket2 = parkingLot.unparkVehicle(ticket1);
         System.out.println(ticket1);
     }
 

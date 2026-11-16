@@ -1,5 +1,7 @@
 package strategy;
 
+import enums.ParkingSpotType;
+import enums.VehicleType;
 import model.Floor;
 import model.ParkingSpot;
 import model.Vehicle;
@@ -15,12 +17,20 @@ public class VehicleTypeSpotAssignmentStrategy implements SpotAssignmentStrategy
     @Override
     public ParkingSpot getParkingSpot(Vehicle vehicle) {
         for(Floor floor: this.floors) {
-            ParkingSpot ps = floor.getAvailableSpot(vehicle.getSpotType());
+            ParkingSpot ps = floor.getAvailableSpot(getParkingSpotType(vehicle.getVehicleType()));
             if(ps != null) {
                 return ps;
             }
         }
 
         return null;
+    }
+
+    ParkingSpotType getParkingSpotType(VehicleType vehicleType) {
+        return switch (vehicleType) {
+            case VehicleType.MOTORCYCLE -> ParkingSpotType.MOTORCYCLE_SPOT;
+            case VehicleType.CAR -> ParkingSpotType.COMPACT_SPOT;
+            default -> ParkingSpotType.LARGE_SPOT;
+        };
     }
 }

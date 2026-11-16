@@ -1,17 +1,17 @@
 package model;
 
-import enums.ParkingSportStatus;
+import enums.ParkingSpotStatus;
 import enums.ParkingSpotType;
 
 public class ParkingSpot {
     private int spotId;
     private ParkingSpotType spotType;
-    private ParkingSportStatus status;
+    private ParkingSpotStatus status;
 
     public ParkingSpot(int spotId, ParkingSpotType pst) {
         this.spotId = spotId;
         this.spotType = pst;
-        this.status = ParkingSportStatus.Free;
+        this.status = ParkingSpotStatus.Free;
     }
 
     public int getSpotId() {
@@ -31,18 +31,18 @@ public class ParkingSpot {
     }
 
     public boolean isFree() {
-        return status == ParkingSportStatus.Free;
+        return status == ParkingSpotStatus.Free;
     }
 
     public synchronized void book() {
-        if(status == ParkingSportStatus.Reserved) {
+        if(status == ParkingSpotStatus.Reserved) {
             throw new RuntimeException("Not available");
         }
 
-        this.status = ParkingSportStatus.Reserved;
+        this.status = ParkingSpotStatus.Reserved;
     }
 
     public void makeAvailable() {
-        this.status = ParkingSportStatus.Free;
+        this.status = ParkingSpotStatus.Free;
     }
 }

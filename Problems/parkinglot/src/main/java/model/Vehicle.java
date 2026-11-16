@@ -1,16 +1,16 @@
 package model;
 
-import enums.ParkingSpotType;
+import enums.VehicleType;
 
 public abstract class Vehicle {
-    private ParkingSpotType spotType;
+    private VehicleType vehicleType;
     String vehicleNumber;
 
-    public ParkingSpotType getSpotType() {
-        return spotType;
+    public VehicleType getVehicleType() {
+        return vehicleType;
     }
 
-    public void setSpotType(ParkingSpotType parkingSpotType) {
-        this.spotType = parkingSpotType;
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 }

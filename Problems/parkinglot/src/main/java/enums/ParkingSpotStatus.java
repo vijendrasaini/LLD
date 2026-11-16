@@ -1,6 +1,6 @@
 package enums;
 
-public enum ParkingSportStatus {
+public enum ParkingSpotStatus {
     Free,
     Reserved
 }

@@ -9,6 +9,7 @@ public class ParkingTicket {
     Vehicle vehicle;
     LocalDateTime createdAt;
     LocalDateTime exitedAt;
+    double paymentAmount;
 
     public ParkingTicket(ParkingSpot parkingSpot, Vehicle vehicle) {
         this.number = UUID.randomUUID().toString().substring(0, 10);
@@ -33,5 +34,13 @@ public class ParkingTicket {
 
     public void markClosed() {
         this.exitedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setPaymentAmount(double paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 }

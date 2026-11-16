@@ -1,3 +1,4 @@
+import exception.ParkingLotFullException;
 import model.Floor;
 import model.ParkingSpot;
 import model.ParkingTicket;
@@ -20,6 +21,10 @@ public class ParkingLot {
     ParkingTicket parkVehicle(Vehicle vehicle) {
         ParkingSpot parkingSpot = this.spotAssignmentStrategy.getParkingSpot(vehicle);
 
+        if(parkingSpot == null) {
+            throw new ParkingLotFullException("No spot is currently available for Vehicle Type : %s".formatted(vehicle.getVehicleType()));
+        }
+
         parkingSpot.book();
         return ParkingTicket.create(parkingSpot, vehicle);
     }
@@ -29,6 +34,7 @@ public class ParkingLot {
 
         // Created charges/payment amount and get this paid
         double amount = this.paymentCalculationStrategy.getPayment(parkingTicket);
+        parkingTicket.setPaymentAmount(amount);
         // paying the amount here;
 
         parkingTicket.markClosed();
