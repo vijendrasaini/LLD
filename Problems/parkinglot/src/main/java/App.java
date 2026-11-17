@@ -5,10 +5,7 @@ import model.Floor;
 import model.ParkingSpot;
 import model.ParkingTicket;
 import model.Vehicle;
-import strategy.FixedPricePaymentCalculationStrategy;
-import strategy.PaymentCalculationStrategy;
-import strategy.SpotAssignmentStrategy;
-import strategy.VehicleTypeSpotAssignmentStrategy;
+import strategy.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +50,7 @@ public class App {
         floorList.add(floor2);
 
         SpotAssignmentStrategy spotAssignmentStrategy = new VehicleTypeSpotAssignmentStrategy(floorList);
-        PaymentCalculationStrategy paymentCalculationStrategy = new FixedPricePaymentCalculationStrategy();
+        PaymentCalculationStrategy paymentCalculationStrategy = new TimeBasedPaymentCalculationStrategy();
         return new ParkingLot(floorList, spotAssignmentStrategy, paymentCalculationStrategy);
     }
 }

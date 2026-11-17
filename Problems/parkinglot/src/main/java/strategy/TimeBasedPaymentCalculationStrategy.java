@@ -16,7 +16,7 @@ public class TimeBasedPaymentCalculationStrategy implements PaymentCalculationSt
         if(hours > 0) {
             return hours * 10;
         } else {
-            long minutes = duration.toMillis();
+            long minutes = duration.toMinutes();
             if(minutes > 10) {
                 return minutes * ( 1.0 / 7);
             }
