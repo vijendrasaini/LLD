@@ -23,7 +23,7 @@ public class ParkingTicket {
         return new ParkingTicket(parkingSpot, vehicle);
     }
 
-    public synchronized void makeSpotAvailable() {
+    public void makeSpotAvailable() {
         this.parkingSpot.makeAvailable();
     }
 

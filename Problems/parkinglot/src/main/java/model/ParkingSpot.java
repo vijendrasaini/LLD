@@ -51,7 +51,7 @@ public class ParkingSpot {
         return false;
     }
 
-    public void makeAvailable() {
+    public synchronized void makeAvailable() {
         this.status = ParkingSpotStatus.Free;
     }
 }

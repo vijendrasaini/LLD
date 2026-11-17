@@ -25,7 +25,6 @@ public class ParkingLot {
             throw new ParkingLotFullException("No spot is currently available for Vehicle Type : %s".formatted(vehicle.getVehicleType()));
         }
 
-        parkingSpot.book();
         return ParkingTicket.create(parkingSpot, vehicle);
     }
 
