@@ -42,6 +42,15 @@ public class ParkingSpot {
         this.status = ParkingSpotStatus.Reserved;
     }
 
+    public synchronized boolean tryBook() {
+        if(status == ParkingSpotStatus.Free) {
+            this.status = ParkingSpotStatus.Reserved;
+            return true;
+        }
+
+        return false;
+    }
+
     public void makeAvailable() {
         this.status = ParkingSpotStatus.Free;
     }

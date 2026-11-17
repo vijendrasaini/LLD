@@ -19,7 +19,7 @@ public class Floor {
 
     public ParkingSpot getAvailableSpot(ParkingSpotType parkingSpotType) {
         for(ParkingSpot spot: spotList) {
-            if(spot.getSpotType() == parkingSpotType && spot.isFree()) {
+            if(spot.getSpotType() == parkingSpotType && spot.tryBook()) {
                 return spot;
             }
         }

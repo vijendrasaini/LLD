@@ -23,13 +23,13 @@ public class ParkingTicket {
         return new ParkingTicket(parkingSpot, vehicle);
     }
 
-    public void makeSpotAvailable() {
+    public synchronized void makeSpotAvailable() {
         this.parkingSpot.makeAvailable();
     }
 
     @Override
     public String toString() {
-        return "Number: %s \nCreated-At: %s\nClosed-At: %s".formatted(number, createdAt, exitedAt);
+        return "Number: %s \nCreated-At: %s\nClosed-At: %s\nPayment-Amount: %f".formatted(number, createdAt, exitedAt, paymentAmount);
     }
 
     public void markClosed() {

@@ -10,14 +10,18 @@ public class TimeBasedPaymentCalculationStrategy implements PaymentCalculationSt
     public double getPayment(ParkingTicket parkingTicket) {
         LocalDateTime current = LocalDateTime.now();
 
-        Duration duration = Duration.between(current, parkingTicket.getCreatedAt());
+        Duration duration = Duration.between(parkingTicket.getCreatedAt(), current);
         long hours = duration.toHours();
 
         if(hours > 0) {
             return hours * 10;
         } else {
             long minutes = duration.toMillis();
-            return minutes * ( 1.0 / 7);
+            if(minutes > 10) {
+                return minutes * ( 1.0 / 7);
+            }
+
+            return 5.0; // fixed charge for less than 10 minutes duration
         }
     }
 }
