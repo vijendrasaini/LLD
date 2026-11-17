@@ -1,10 +1,7 @@
 import enums.ParkingSpotType;
 import factory.CarVehicleFactory;
 import factory.VehicleFactory;
-import model.Floor;
-import model.ParkingSpot;
-import model.ParkingTicket;
-import model.Vehicle;
+import model.*;
 import strategy.*;
 
 import java.util.ArrayList;
@@ -15,14 +12,33 @@ public class App {
         ParkingLot parkingLot = buildParkingLot();
 
         VehicleFactory carFactory = new CarVehicleFactory();
-        Vehicle car1 = carFactory.createVehicle("RJ18XA1234");
+        /*Vehicle car1 = carFactory.createVehicle("RJ18XA1234");
 
         ParkingTicket ticket1 = parkingLot.parkVehicle(car1);
         System.out.println(ticket1);
 
         // after quite some time
         ParkingTicket ticket2 = parkingLot.unparkVehicle(ticket1);
-        System.out.println(ticket1);
+        System.out.println(ticket1);*/
+
+        Runnable gateTask = () -> {
+            String threadName = Thread.currentThread().getName();
+            Vehicle car = carFactory.createVehicle("RJ18-" + threadName);
+            try {
+                ParkingTicket parkingTicket = parkingLot.parkVehicle(car);
+                System.out.println(threadName + " SUCCESS: Allocated Spot #" + parkingTicket.getParkingSpot().getSpotId());
+            } catch(Exception e) {
+                System.out.println(threadName + " FAILED: " + e.getMessage());
+            }
+        };
+
+        Thread gate1 = new Thread(gateTask);
+        Thread gate2 = new Thread(gateTask);
+        Thread gate3 = new Thread(gateTask);
+
+        gate1.start();
+        gate2.start();
+        gate3.start();
     }
 
     public static ParkingLot buildParkingLot() {

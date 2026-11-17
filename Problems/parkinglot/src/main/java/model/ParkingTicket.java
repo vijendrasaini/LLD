@@ -43,4 +43,8 @@ public class ParkingTicket {
     public void setPaymentAmount(double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
+
+    public ParkingSpot getParkingSpot() {
+        return parkingSpot;
+    }
 }
