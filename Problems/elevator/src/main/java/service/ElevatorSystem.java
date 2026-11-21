@@ -38,11 +38,11 @@ public class ElevatorSystem {
                 selectedElevator.setDirection(Direction.UP);
             } else {
                 // on the same floor;
-                elevatorCar.openTheDoor();
+                selectedElevator.openTheDoor();
             }
         }
 
-        elevatorCar.addStop(floor);
+        selectedElevator.addStop(floor);
     }
 
     public void pressFloorButton(Floor destFloor, ElevatorCar elevatorCar) {
