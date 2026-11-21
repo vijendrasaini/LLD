@@ -20,12 +20,12 @@ public class App {
         controller.addElevatorCar(ec2);
 
         controller.showStatus();
-        controller.requestFloor(Floor.FIFTH_FLOOR, ec1, Direction.UP);
-        controller.requestFloor(Floor.FIFTH_FLOOR, ec2, Direction.DOWN);
+        controller.requestFloor(Floor.FIFTH_FLOOR, Direction.UP);
+        controller.requestFloor(Floor.FIFTH_FLOOR, Direction.DOWN);
         controller.step();
         controller.step();
-        controller.requestFloor(Floor.GROUND_FLOOR, ec1, Direction.UP);
-        controller.requestFloor(Floor.SEVENTH_FLOOR, ec2, Direction.DOWN);
+        controller.requestFloor(Floor.GROUND_FLOOR, Direction.UP);
+        controller.requestFloor(Floor.SEVENTH_FLOOR, Direction.DOWN);
 
         controller.showStatus();
         controller.step();

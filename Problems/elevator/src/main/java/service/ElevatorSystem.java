@@ -23,15 +23,15 @@ public class ElevatorSystem {
         this.elevatorCars.add(ec);
     }
 
-    public void requestFloor(Floor floor, ElevatorCar elevatorCar, Direction direction) {
-        System.out.printf("Request for Floor: %s to go: %s from: %s%n", floor, direction, elevatorCar.getId());
-        Request request = new Request(floor, elevatorCar);
+    public void requestFloor(Floor floor, Direction direction) {
+        System.out.printf("Request for Floor: %s to go: %s", floor, direction);
+        Request request = new Request(floor);
         ElevatorCar selectedElevator = selectionStrategy.getElevator(elevatorCars, request);
 
         int carFloor = selectedElevator.getCurrentFloor().ordinal();
         int destFloor = floor.ordinal();
 
-        if(elevatorCar.getState() == ElevatorState.IDLE) {
+/*        if(elevatorCar.getState() == ElevatorState.IDLE) {
             if(destFloor < carFloor) {
                 selectedElevator.setDirection(Direction.DOWN);
             } else if(destFloor > carFloor) {
@@ -40,7 +40,7 @@ public class ElevatorSystem {
                 // on the same floor;
                 selectedElevator.openTheDoor();
             }
-        }
+        }*/
 
         selectedElevator.addStop(floor);
     }
