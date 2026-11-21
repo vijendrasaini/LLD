@@ -25,7 +25,7 @@ public class ElevatorSystem {
 
     public void requestFloor(Floor floor, Direction direction) {
         System.out.printf("Request for Floor: %s to go: %s", floor, direction);
-        Request request = new Request(floor);
+        Request request = new Request(floor, direction);
         ElevatorCar selectedElevator = selectionStrategy.getElevator(elevatorCars, request);
 
         int carFloor = selectedElevator.getCurrentFloor().ordinal();
