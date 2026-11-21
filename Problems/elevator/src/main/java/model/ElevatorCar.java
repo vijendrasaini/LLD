@@ -62,12 +62,28 @@ public class ElevatorCar {
     }
 
     public void addStop(Floor floor) {
-        if(floor.ordinal() < this.currentFloor.ordinal()) {
+        int current = this.currentFloor.ordinal();
+        int target = floor.ordinal();
+
+        if(target < current) {
             this.downStops.add(floor);
+            if(state == ElevatorState.IDLE) {
+                direction = Direction.DOWN;
+            }
+
             return;
         }
 
-        this.upStops.add(floor);
+        if(target > current) {
+            this.upStops.add(floor);
+            if(state == ElevatorState.IDLE) {
+                direction = Direction.UP;
+            }
+
+            return;
+        }
+
+        openTheDoor();
     }
 
     public void step() {
