@@ -5,10 +5,6 @@ import enums.Floor;
 public class FloorConfig {
     private static final Floor[] floors = Floor.values();
 
-    public static int getHeight() {
-        return floors.length;
-    }
-
     public static Floor getGroundFloor() {
         return floors[0];
     }

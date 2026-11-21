@@ -10,18 +10,22 @@ import model.Request;
 import java.util.List;
 
 public class LookAlgoSelectionStrategy implements ElevatorSelectionStrategy {
-    private final int TOTAL_HEIGHT = FloorConfig.getHeight();
+    private final int TOTAL_HEIGHT = FloorConfig.getTopFloor().ordinal();
 
     @Override
     public ElevatorCar getElevator(List<ElevatorCar> elevatorCarList, Request request) {
+        if(elevatorCarList == null || elevatorCarList.isEmpty()) {
+            throw new IllegalArgumentException("No elevator available.");
+        }
+
         ElevatorCar selected = elevatorCarList.getFirst();
-        int penality = Integer.MAX_VALUE;
+        int penalty = Integer.MAX_VALUE;
 
         for(ElevatorCar ec: elevatorCarList) {
-            int carPenality = getPenality(ec, request.getDestination(), request.getDirection());
-            if(penality > carPenality) {
+            int carPenalty = getPenality(ec, request.getDestination(), request.getDirection());
+            if(penalty > carPenalty) {
                 selected = ec;
-                penality = carPenality;
+                penalty = carPenalty;
             }
         }
 
@@ -38,8 +42,8 @@ public class LookAlgoSelectionStrategy implements ElevatorSelectionStrategy {
             return Math.abs(current - target) + IDLE_DISPATCH_PENALITY;
         }
 
-        if(car.getDirection() == Direction.UP && target > current ||
-                car.getDirection() == Direction.DOWN && current > target) { // same direction
+        if(car.getDirection() == Direction.UP && target >= current && direction == Direction.UP ||
+                car.getDirection() == Direction.DOWN && current >= target && direction == Direction.DOWN) { // same direction
             return Math.abs(target - current);
         }
 
