@@ -61,7 +61,7 @@ public class ElevatorCar {
         System.out.printf("At Time: %s, Current Floor: %s, State: %s, direction: %s, Up request: %s, Down Request: %s\n", atTime, currentFloor, state, direction, upStops, downStops);
     }
 
-    public void addStop(Floor floor) {
+    public synchronized void addStop(Floor floor) {
         int current = this.currentFloor.ordinal();
         int target = floor.ordinal();
 
@@ -86,7 +86,7 @@ public class ElevatorCar {
         openTheDoor();
     }
 
-    public void step() {
+    public synchronized void step() {
         if(state == ElevatorState.IDLE) {
             if(upStops.isEmpty() && downStops.isEmpty()) {
                 System.out.printf("EC : %d is IDLE%n", id);
