@@ -6,6 +6,7 @@ import exception.PaymentFailedForBooking;
 import exception.SeatNotAvailable;
 import model.Booking;
 import model.Seat;
+import model.Show;
 import model.ShowSeat;
 
 import java.util.ArrayList;
@@ -19,28 +20,37 @@ public class BookingService {
 
         // sorting to avoid starvation in case of same seat is booked at the same time
         showSeatList.sort(Comparator.comparing(ShowSeat::getId));
-
-        try {
-            // reserve seats
-            for(ShowSeat seat: showSeatList) {
-                seat.reserve();
-            }
-
-            Booking booking = new Booking(showSeatList, userId);
-            PaymentStatus paymentStatus = makePayment(booking);
-            if(paymentStatus == PaymentStatus.FAILURE) {
-                throw new PaymentFailedForBooking("Payment failed");
-            }
-
-            for(ShowSeat seat: showSeatList) {
-                seat.book();
-            }
-
-            booking.setStatus(BookingStatus.BOOKED);
-            return booking;
-        } finally {
-            makeShowSeatsAvailable(showSeatList);
+        for(ShowSeat seat: showSeatList) {
+            seat.lock();
         }
+
+        List<ShowSeat> reservedSeats = new ArrayList<>();
+        for(ShowSeat seat: showSeatList) {
+            if(!seat.tryReserve()) {
+                makeShowSeatsAvailable(reservedSeats);
+                throw new SeatNotAvailable("Seat is not available");
+            }
+
+            reservedSeats.add(seat);
+        }
+
+        for(ShowSeat seat: showSeatList) {
+            seat.unlock();
+        }
+
+        Booking booking = new Booking(showSeatList, userId);
+        PaymentStatus paymentStatus = makePayment(booking);
+        if(paymentStatus == PaymentStatus.FAILURE) {
+            makeShowSeatsAvailable(showSeatList);
+            throw new PaymentFailedForBooking("Payment failed");
+        }
+
+        for(ShowSeat seat: showSeatList) {
+            seat.book();
+        }
+
+        booking.setStatus(BookingStatus.BOOKED);
+        return booking;
     }
 
     private PaymentStatus makePayment(Booking booking) {

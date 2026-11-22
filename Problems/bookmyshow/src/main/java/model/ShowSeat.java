@@ -5,6 +5,7 @@ import exception.SeatNotAvailable;
 import exception.TimeToBookPassedException;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ShowSeat {
     private int id;
@@ -12,6 +13,7 @@ public class ShowSeat {
     private double price;
     private SeatStatus status = SeatStatus.AVAILABLE;
     private LocalDateTime bookedAt;
+    private final ReentrantLock lock = new ReentrantLock();
 
     public ShowSeat(int id, Seat seat, double price) {
         this.id = id;
@@ -19,17 +21,17 @@ public class ShowSeat {
         this.price = price;
     }
 
-    public synchronized void reserve() {
-        if(this.status != SeatStatus.AVAILABLE) {
-            throw new SeatNotAvailable("Not available");
+    public synchronized boolean isAvailable() {
+        if(this.status == SeatStatus.AVAILABLE) {
+            return true;
         }
 
         LocalDateTime current = LocalDateTime.now();
         LocalDateTime reservedTill = bookedAt.plusMinutes(10);
-        if(!current.isAfter(reservedTill)) {
-            throw new SeatNotAvailable("Not available");
-        }
+        return current.isAfter(reservedTill);
+    }
 
+    public  void reserve() {
         status = SeatStatus.RESERVED;
         bookedAt = LocalDateTime.now();
     }
@@ -63,5 +65,27 @@ public class ShowSeat {
                 ", status=" + status +
                 ", bookedAt=" + bookedAt +
                 '}';
+    }
+
+    public void lock() {
+        this.lock.lock();
+    }
+
+    public void unlock() {
+        this.lock.unlock();
+    }
+
+    public boolean tryReserve() {
+        if(status == SeatStatus.BOOKED) {
+            return false;
+        }
+
+        if(status == SeatStatus.AVAILABLE || status == SeatStatus.RESERVED && LocalDateTime.now().isAfter(bookedAt.plusMinutes(10))) {
+            this.status = SeatStatus.RESERVED;
+            this.bookedAt = LocalDateTime.now();
+            return true;
+        }
+
+        return false;
     }
 }
