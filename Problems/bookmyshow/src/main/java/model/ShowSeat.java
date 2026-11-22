@@ -21,21 +21,6 @@ public class ShowSeat {
         this.price = price;
     }
 
-    public synchronized boolean isAvailable() {
-        if(this.status == SeatStatus.AVAILABLE) {
-            return true;
-        }
-
-        LocalDateTime current = LocalDateTime.now();
-        LocalDateTime reservedTill = bookedAt.plusMinutes(10);
-        return current.isAfter(reservedTill);
-    }
-
-    public  void reserve() {
-        status = SeatStatus.RESERVED;
-        bookedAt = LocalDateTime.now();
-    }
-
     public int getId() {
         return id;
     }

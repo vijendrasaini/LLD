@@ -25,18 +25,21 @@ public class BookingService {
         }
 
         List<ShowSeat> reservedSeats = new ArrayList<>();
-        for(ShowSeat seat: showSeatList) {
-            if(!seat.tryReserve()) {
-                makeShowSeatsAvailable(reservedSeats);
-                throw new SeatNotAvailable("Seat is not available");
+        try {
+            for(ShowSeat seat: showSeatList) {
+                if(!seat.tryReserve()) {
+                    makeShowSeatsAvailable(reservedSeats);
+                    throw new SeatNotAvailable("Seat is not available");
+                }
+
+                reservedSeats.add(seat);
             }
-
-            reservedSeats.add(seat);
+        } finally {
+            for(ShowSeat seat: showSeatList) {
+                seat.unlock();
+            }
         }
 
-        for(ShowSeat seat: showSeatList) {
-            seat.unlock();
-        }
 
         Booking booking = new Booking(showSeatList, userId);
         PaymentStatus paymentStatus = makePayment(booking);
